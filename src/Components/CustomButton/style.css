@@ -1,0 +1,96 @@
+.customButton {
+  display: inline-block;
+  font-size: 14px;
+  text-transform: capitalize;
+  text-align: center;
+  padding: 10px 20px;
+  min-width: 130px;
+  width: 100%;
+  position: relative;
+  border: none;
+  height: auto;
+  background-color: var(--btn-primary-color);
+  color: var(--btn-text-color);
+  cursor: pointer;
+  border-radius: 99px;
+  border: 1px solid transparent;
+  transition: color 0.3s, background-color 0.3s;
+  text-transform: capitalize;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.customButton:hover {
+  background-color: var(--btn-secondary-color);
+  color: var(--btn-text-hover-color);
+}
+.customButton:active,
+.customButton:focus {
+  outline: 2px solid var(--btn-secondary-color) !important;
+  outline-offset: 3px;
+}
+.filter-button {
+  color: #fff;
+  line-height: normal;
+  text-transform: capitalize;
+}
+.primaryButton {
+  background: var(--btn-primary-color);
+}
+.customButton.danger {
+  background: #ff1f35;
+  color: #fff;
+  transition: 0.15s all ease-out;
+}
+.customButton.danger:active {
+  outline-color: #e0162a !important;
+}
+.customButton.danger:not(.chip):hover {
+  background-color: #e0162a;
+  color: #fff;
+  transition: none;
+}
+.secondaryButton {
+  border: 2px solid var(--btn-primary-color);
+  color: var(--primary-text-color);
+  background-color: transparent;
+}
+.secondaryButton:hover {
+  border: 2px solid var(--btn-secondary-color);
+  color: var(--input-bg-color);
+  background-color: var(--btn-secondary-color);
+}
+.disabled {
+  cursor: not-allowed;
+  color: #6b6b6b;
+  background-color: color-mix(in srgb, black 10%, var(--body-bg-color) 90%) !important;
+}
+.disabled.customButton:hover,
+.disabled.customButton:active {
+  color: #6b6b6b;
+  outline: none !important;
+  transform: none !important;
+}
+.searchButton {
+  padding: 16px 16px;
+  min-width: fit-content;
+}
+.small {
+  padding-block: 11px;
+}
+.fitContent {
+  min-width: 200px;
+  max-width: fit-content;
+}
+@media screen and (max-width: 575px) {
+  .customButton {
+    font-size: 10px;
+    height: unset;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .customButton {
+    min-width: unset;
+  }
+}
