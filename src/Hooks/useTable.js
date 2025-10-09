@@ -13,10 +13,10 @@ export const useFetchTableData = (
     queryFn: async () => {
       const data = await fetchService(filters);
       updatePagination({
-        showData: data.to,
-        currentPage: data.current_page,
-        totalRecords: data.total,
-        totalPages: Math.ceil(data.total / data.per_page),
+        showData: data.meta.to,
+        currentPage: data.meta.current_page,
+        totalRecords: data.meta.total,
+        totalPages: Math.ceil(data.meta.total / data.meta.per_page),
       });
       return data;
     },

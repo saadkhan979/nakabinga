@@ -93,8 +93,8 @@ input::-webkit-inner-spin-button {
   --dash-icon-wrapper-bg: #f4f7fe; /* Dashboard icon wrapper */
 
   --pagination-bg-color: #628079; /* For table pagination */
-  --pagination-text-color: #000;
-  --pagination-hover-text-color: #000;
+  --pagination-text-color: #fff;
+  --pagination-hover-text-color: #fff;
 
   --primary-text-color: #000;
   --secondary-text-color: #646464; /* Placeholder and? */

@@ -3,6 +3,7 @@
   position: relative;
   min-height: 370px;
 }
+
 .customTable .tabel-select {
   padding: 0px 14px 0 0;
 }
@@ -10,25 +11,36 @@
 .customTable table {
   font-size: 14px;
   width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0 10px !important;
+  white-space: nowrap !important;
 }
 
 .customTable table thead tr th:last-child {
   text-align: center;
 }
+
 .inputTable.noActions table thead tr th:last-child {
   text-align: left;
 }
+
 .customTable tr td:first-child {
-  border-radius: 5px 0 0 5px !important;
+  border-radius: 50px 0 0 50px !important;
+  border-left: 1.5px solid rgba(102, 102, 102, 0.10);
+
 }
+
 .customTable tr td:last-child {
   text-align: center;
   padding: 10px 35px !important;
-  border-radius: 0 5px 5px 0 !important;
+  border-radius: 0 50px 50px 0 !important;
+  border-right: 1.5px solid rgba(102, 102, 102, 0.10);
 }
+
 .customTable tr td:last-child div {
   min-width: max-content;
 }
+
 .inputTable.noActions tr td:last-child div {
   min-width: 100%;
 }
@@ -37,44 +49,53 @@
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+
 .customTable td {
   font-size: 14px;
   vertical-align: middle;
-  color: var(--table-td-color);
-  padding: 20px 16px !important;
+  color: var(--white-color);
+  padding: 18px 16px !important;
+  border-top: 1.5px solid rgba(102, 102, 102, 0.10);
+  border-bottom: 1.5px solid rgba(102, 102, 102, 0.10);
 }
 
 .customTable.inputTable td,
 .customTable.inputTable.noActions td {
   padding: 10px 12px !important;
 }
+
 .customTable.inputTable tbody tr:hover {
-  background-color: var(--content-bg-color);
+  background-color: var(--white-color);
 }
+
 .customTable tbody tr {
   transition: 0.2s ease-out;
 }
+
 .customTable tbody tr:hover {
-  background-color: color-mix(
-    in srgb,
-    var(--primary-color) 4%,
-    transparent 96%
-  );
+  background-color: color-mix(in srgb,
+      var(--primary-color) 4%,
+      transparent 96%);
   transition: none;
 }
+
 .customTable td a {
-  color: var(--table-td-color);
+  color: var(--white-color);
   transition: all 0.15s ease-out;
 }
-.customTable td a:hover {
-  /* color: var(--secondary-color); */
+
+/* .customTable td a:hover {
+  color: var(--white-color);
   transition: none;
-}
+  background: #000000 !important;
+} */
+
 .customTable tr:not(:last-child) {
   border-right: 0 !important;
   border-left: 0 !important;
   border: 1px solid #f2f2f2;
 }
+
 .customTable table th,
 .customTable table td {
   padding: 0.8rem 1rem;
@@ -86,6 +107,14 @@
   text-transform: capitalize;
   font-size: 16px;
   font-weight: 500;
+  background: #FFE3DE;
+  padding: 18px 16px !important;
+}
+.customTable table th:first-child {
+  border-radius: 50px 0 0 50px !important;
+}
+.customTable table th:last-child {
+  border-radius: 0 50px 50px 0 !important;
 }
 
 .customTable .thumbnail {
@@ -105,6 +134,7 @@
   overflow: hidden;
   /* border: 1px solid #e0e0e0; */
 }
+
 .dropdownMenu {
   padding: 0;
   border-radius: 12px;
@@ -114,6 +144,7 @@
   overflow: hidden;
   /* border: 1px solid #e0e0e0; */
 }
+
 .tableAction {
   font-size: 15px;
   font-weight: 600;
@@ -129,26 +160,27 @@
   width: 100%;
   transition: 0.15s ease-out;
 }
+
 .tableAction svg:hover {
   /* color: var(--primary-color); */
   transition: none;
 }
-.tableAction .view:hover,
+
+/* .tableAction .view:hover,
 .tableAction .view.with-color {
   color: #28a745;
-}
-.tableAction .edit:hover,
+} */
+/* .tableAction .edit:hover,
 .tableAction .edit.with-color {
-  /* color: #ffc107; */
   color: #d39e00;
-}
-.tableAction .delete:hover,
+} */
+/* .tableAction .delete:hover,
 .tableAction .delete.with-color {
   color: #dc3545;
 }
 .tableAction .attachments:hover {
   color: #007bff;
-}
+} */
 
 .tableActionIcon {
   font-size: 15px;
@@ -168,6 +200,7 @@
   align-items: center;
   z-index: 10;
 }
+
 /* Table Action Tooltip */
 .tooltip-toggle {
   cursor: pointer;
@@ -177,6 +210,7 @@
   /* Setting up the transition */
   /* Triggering the transition */
 }
+
 .tooltip-toggle::before {
   position: absolute;
   top: -39px;
@@ -189,6 +223,7 @@
   text-transform: none;
   width: fit-content;
 }
+
 .tooltip-toggle::after {
   position: absolute;
   top: -6px;
@@ -202,6 +237,7 @@
   margin-left: -5px;
   width: 0;
 }
+
 .tooltip-toggle::before,
 .tooltip-toggle::after {
   color: #efefef;
@@ -210,6 +246,7 @@
   pointer-events: none;
   text-align: center;
 }
+
 .tooltip-toggle:focus::before,
 .tooltip-toggle:focus::after,
 .tooltip-toggle:hover::before,
@@ -228,15 +265,14 @@
 }
 
 .customTable::-webkit-scrollbar-thumb {
-  border: 2px solid var(--content-bg-color);
-  background-color: color-mix(
-    in srgb,
-    var(--primary-color) 10%,
-    rgb(169, 169, 169) 80%
-  ) !important;
+  border: 2px solid var(--white-color);
+  background-color: color-mix(in srgb,
+      var(--primary-color) 10%,
+      rgb(169, 169, 169) 80%) !important;
   border-radius: 8px;
   cursor: grab;
 }
+
 .customTable::-webkit-scrollbar-thumb:active {
   cursor: grabbing;
 }

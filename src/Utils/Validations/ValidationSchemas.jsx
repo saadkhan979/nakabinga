@@ -86,3 +86,9 @@ export const changePasswordSchema = Yup.object({
 });
 
 
+
+export const reasonValidationSchema = Yup.object({
+  reason: Yup.string()
+    .required('Reason is required')
+    .max(200, 'Maximum 200 characters allowed'),
+});

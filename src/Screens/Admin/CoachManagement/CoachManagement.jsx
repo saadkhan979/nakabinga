@@ -18,13 +18,14 @@ import { useFetchTableData } from '../../../Hooks/useTable';
 import {
   getListing,
   updateStatus,
-} from '../../../Services/Admin/UserManagement';
+} from '../../../Services/Admin/CoachManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
 import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
-import { userManagementHeaders } from '../../../Utils/Constants/TableHeaders';
+import { coachManagementHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, serialNum, showErrorToast } from '../../../Utils/Utils';
+import CustomButton from '../../../Components/CustomButton';
 
-const UserManagement = ({
+const CoachManagement = ({
   showModal,
   closeModal,
   filters,
@@ -32,7 +33,7 @@ const UserManagement = ({
   pagination,
   updatePagination,
 }) => {
-  usePageTitle('User Management');
+  usePageTitle('Coach Management');
   const navigate = useNavigate();
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const [selectedObj, setSelectedObj] = useState(null);
@@ -91,14 +92,18 @@ const UserManagement = ({
     <>
       <section>
         <div className="d-flex justify-content-between flex-wrap mb-3">
-          <h2 className="screen-title mb-0">User Management</h2>
+          <h2 className="screen-title mb-0">Coach Management</h2>
+          <CustomButton
+            text="new coach’s request"
+            onClick={() => (navigate("coach-requests"))}
+          />
         </div>
         <Row>
           <Col xs={12}>
             <CustomTable
               filters={filters}
               setFilters={setFilters}
-              headers={userManagementHeaders}
+              headers={coachManagementHeaders}
               pagination={pagination}
               isLoading={isLoading}
               selectOptions={[
@@ -115,7 +120,7 @@ const UserManagement = ({
                 <tbody>
                   {isError && (
                     <tr>
-                      <td colSpan={userManagementHeaders.length}>
+                      <td colSpan={coachManagementHeaders.length}>
                         <p className="text-danger mb-0">
                           Unable to fetch data at this time
                         </p>
@@ -179,11 +184,11 @@ const UserManagement = ({
         disableClick={isStatusUpdating} // Disable action button during mutation
         action={confirmStatusChange} // Perform status change on confirm
         title={isStatusActive(selectedObj) ? 'Deactivate' : 'Activate'}
-        description={`Are you sure you want to ${isStatusActive(selectedObj) ? 'deactivate' : 'activate'
-          } this user?`}
+        description={`Are you sure, you want to ${isStatusActive(selectedObj) ? 'deactivate' : 'activate'
+          } this coach?`}
       />
     </>
   );
 };
 
-export default withModal(withFilters(UserManagement));
+export default withModal(withFilters(CoachManagement));

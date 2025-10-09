@@ -3,6 +3,8 @@ import { Modal } from 'react-bootstrap';
 import { IoCloseCircle, IoCloseOutline } from 'react-icons/io5';
 import { PulseLoader } from 'react-spinners';
 import CustomButton from '../CustomButton';
+import Warning from '../../assets/images/warning.svg?react';
+import Checked from '../../assets/images/checked.svg?react';
 import './style.css';
 import { BsCheckCircleFill, BsQuestionCircleFill } from 'react-icons/bs';
 
@@ -33,7 +35,7 @@ const CustomModal = ({
       case 'success':
         return (
           <div className="modalImageWrapper rounded-circle beechMein">
-            <BsCheckCircleFill size={100} color="#28AA72" />
+            <Checked />
           </div>
         );
       case 'error':
@@ -45,13 +47,13 @@ const CustomModal = ({
       case 'info':
         return (
           <div className="modalImageWrapper rounded-circle beechMein">
-            <BsQuestionCircleFill size={100} color="#fdc770" />
+            <Warning size={100} color="#fdc770" />
           </div>
         );
       default:
         return (
           <div className="modalImageWrapper rounded-circle beechMein">
-            <BsQuestionCircleFill size={100} color="#fdc770" />
+            <Warning size={100} color="#fdc770" />
           </div>
         );
     }
@@ -103,9 +105,8 @@ const CustomModal = ({
             </div>
             {variant === 'success' ? (
               <div
-                className={`d-flex align-content-center justify-content-center pt-3 ${
-                  variant === 'success' ? 'gap-2 flex-wrap' : ''
-                }`}
+                className={`d-flex align-content-center justify-content-center pt-3 ${variant === 'success' ? 'gap-2 flex-wrap' : ''
+                  }`}
               >
                 <CustomButton
                   style={{ width: '100%' }}

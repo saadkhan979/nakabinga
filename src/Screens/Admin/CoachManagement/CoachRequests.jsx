@@ -16,15 +16,17 @@ import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
 import { useFetchTableData } from '../../../Hooks/useTable';
 import {
-  getListing,
-  updateStatus,
-} from '../../../Services/Admin/UserManagement';
+  getRequestsListing,
+  updateRequestsStatus,
+} from '../../../Services/Admin/CoachManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
-import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
-import { userManagementHeaders } from '../../../Utils/Constants/TableHeaders';
+import { requestFilterOptions } from '../../../Utils/Constants/TableFilter';
+import { coachRequestsHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, serialNum, showErrorToast } from '../../../Utils/Utils';
+import CustomButton from '../../../Components/CustomButton';
+import BackButton from '../../../Components/BackButton';
 
-const UserManagement = ({
+const CoachRequests = ({
   showModal,
   closeModal,
   filters,
@@ -32,7 +34,7 @@ const UserManagement = ({
   pagination,
   updatePagination,
 }) => {
-  usePageTitle('User Management');
+  usePageTitle('New Coach Requests');
   const navigate = useNavigate();
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const [selectedObj, setSelectedObj] = useState(null);
@@ -49,7 +51,7 @@ const UserManagement = ({
     'userListing',
     filters,
     updatePagination,
-    getListing
+    getRequestsListing
   );
   console.log(userManagement, 'userManagement')
 
@@ -58,7 +60,7 @@ const UserManagement = ({
     showErrorToast(error);
   }
   const isStatusActive = (item) => {
-    return item?.is_active === 1;
+    return item?.status === 'pending';
   };
   //UPDATE STATUS
   const handleStatusChange = (item) => {
@@ -69,7 +71,7 @@ const UserManagement = ({
   // Mutation for updating status
   const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
     useMutation({
-      mutationFn: async (id) => await updateStatus(id),
+      mutationFn: async (id) => await updateRequestsStatus(id),
       onSuccess: (data) => {
         showToast('Status updated successfully', 'success');
         setChangeStatusModal(false);
@@ -91,20 +93,20 @@ const UserManagement = ({
     <>
       <section>
         <div className="d-flex justify-content-between flex-wrap mb-3">
-          <h2 className="screen-title mb-0">User Management</h2>
+          <h3 className="screen-title mb-0"><BackButton /> New Coach Requests</h3>
         </div>
         <Row>
           <Col xs={12}>
             <CustomTable
               filters={filters}
               setFilters={setFilters}
-              headers={userManagementHeaders}
+              headers={coachRequestsHeaders}
               pagination={pagination}
               isLoading={isLoading}
               selectOptions={[
                 {
                   title: 'status',
-                  options: userStatusFilters,
+                  options: requestFilterOptions,
                 },
               ]}
               dateFilters={[
@@ -115,7 +117,7 @@ const UserManagement = ({
                 <tbody>
                   {isError && (
                     <tr>
-                      <td colSpan={userManagementHeaders.length}>
+                      <td colSpan={coachRequestsHeaders.length}>
                         <p className="text-danger mb-0">
                           Unable to fetch data at this time
                         </p>
@@ -130,14 +132,13 @@ const UserManagement = ({
                         )}
                       </td>
                       <td>{item?.first_name} {item?.last_name}</td>
-                      <td>{item?.email}</td>
-                      <td>{formatDate(item?.created_at)}</td>
+                      <td>{formatDate(item?.updated_at)}</td>
                       <td>
                         <span
-                          className={`chip ${statusClassMap[item.is_active === 1 ? "Active" : "Inactive"]
+                          className={`chip text-capitalize ${statusClassMap[item.status]
                             }`}
                         >
-                          {item?.is_active === 1 ? "Active" : "Inactive"}
+                          {item?.status}
                         </span>
                       </td>
                       <td>
@@ -149,18 +150,18 @@ const UserManagement = ({
                               onClick: () => navigate(`${item.id}`),
                               className: 'view',
                             },
-                            {
-                              name: isStatusActive(item)
-                                ? 'Deactivate'
-                                : 'Activate',
-                              icon: isStatusActive(item)
-                                ? HiOutlineXCircle
-                                : HiOutlineCheckCircle,
-                              onClick: () => handleStatusChange(item),
-                              className: isStatusActive(item)
-                                ? 'delete with-color'
-                                : 'view with-color',
-                            },
+                            // {
+                            //   name: isStatusActive(item)
+                            //     ? 'Deactivate'
+                            //     : 'Activate',
+                            //   icon: isStatusActive(item)
+                            //     ? HiOutlineXCircle
+                            //     : HiOutlineCheckCircle,
+                            //   onClick: () => handleStatusChange(item),
+                            //   className: isStatusActive(item)
+                            //     ? 'delete with-color'
+                            //     : 'view with-color',
+                            // },
                           ]}
                         />
                       </td>
@@ -179,11 +180,11 @@ const UserManagement = ({
         disableClick={isStatusUpdating} // Disable action button during mutation
         action={confirmStatusChange} // Perform status change on confirm
         title={isStatusActive(selectedObj) ? 'Deactivate' : 'Activate'}
-        description={`Are you sure you want to ${isStatusActive(selectedObj) ? 'deactivate' : 'activate'
-          } this user?`}
+        description={`are you sure, you want to ${isStatusActive(selectedObj) ? 'deactivate' : 'activate'
+          } this coach?`}
       />
     </>
   );
 };
 
-export default withModal(withFilters(UserManagement));
+export default withModal(withFilters(CoachRequests));

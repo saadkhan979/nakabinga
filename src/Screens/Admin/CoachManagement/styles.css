@@ -19,9 +19,3 @@
   font-size: 100px;
   color: #999999;
 }
-.certificateImg img {
-  aspect-ratio: 2 / 1.5;
-  object-fit: cover;
-  object-position: center;
-  width: 100%;
-}

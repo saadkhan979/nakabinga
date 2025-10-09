@@ -14,9 +14,9 @@ import {
   getListingB,
   updateStatus,
   viewUser,
-} from '../../../Services/Admin/UserManagement';
+} from '../../../Services/Admin/CoachManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
-import { bookingsHeaders } from '../../../Utils/Constants/TableHeaders';
+import { appointmentlogsHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, getCountryFlag } from '../../../Utils/Utils';
 import { formatPhoneNumberIntl } from 'react-phone-number-input';
 import './styles.css';
@@ -25,12 +25,13 @@ import withModal from '../../../HOC/withModal';
 import withFilters from '../../../HOC/withFilters ';
 import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
 
-const UserDetails = ({ filters,
+const CoachDetails = ({
+  filters,
   setFilters,
   pagination,
   updatePagination,
 }) => {
-  usePageTitle('User Detils');
+  usePageTitle('Coach profile');
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const { id } = useParams();
   let queryClient = useQueryClient();
@@ -68,22 +69,22 @@ const UserDetails = ({ filters,
     retry: 1,
   });
 
-  // User bookings
+  // User appointment
   const {
-    data: bookings = [],
-    isLoading: isLoadingbookingslogs,
-    isError: isErrorbookingslogs,
-    error: errorbookingslogs,
+    data: appointment = [],
+    isLoading: isLoadingappointmentlogs,
+    isError: isErrorappointmentlogs,
+    error: errorappointmentlogs,
   } = useQuery({
-    queryKey: ['bookings', id],
+    queryKey: ['appointment', id],
     queryFn: () => getListingB(id),
     refetchOnWindowFocus: false,
     retry: 1,
   });
 
-  const bookingslogs = bookings?.data ?? [];
+  const appointmentlogs = appointment?.data ?? [];
 
-  if (isLoading && isLoadingbookingslogs) {
+  if (isLoading && isLoadingappointmentlogs) {
     return (
       <>
         <div className="d-card ">
@@ -113,7 +114,7 @@ const UserDetails = ({ filters,
     );
   }
 
-  if (isError && isErrorbookingslogs) {
+  if (isError && isErrorappointmentlogs) {
     return (
       <>
         <div className="d-card">
@@ -127,7 +128,7 @@ const UserDetails = ({ filters,
     <div>
       <div className="d-flex align-items-start mb-4 justify-content-between flex-wrap">
         <div className="d-flex flex-column gap-2">
-          <h2 className="screen-title m-0 d-inline"><BackButton /> User Profile</h2>
+          <h2 className="screen-title m-0 d-inline"><BackButton /> Coach Profile</h2>
         </div>
       </div>
       <div className="d-card py-45 mb-45">
@@ -156,19 +157,31 @@ const UserDetails = ({ filters,
                     <p className="text-data">{user?.email}</p>
                   </div>
                   <div className="col-md-4 mb-3">
-                    <p className="text-label">Phone no:</p>
-                    <span>{getCountryFlag(user?.dial_code)}</span> {user?.dial_code} {user?.phone}
+                    <p className="text-label">Gender:</p>
+                    <p className="text-data">{user?.gender}</p>
                   </div>
                   <div className="col-md-4 mb-3">
-                    <p className="text-label">language:</p>
-                    <p className="text-data">{user?.language_id}</p>
+                    <p className="text-label">City:</p>
+                    <p className="text-data">{user?.city}</p>
+                  </div>
+                  <div className="col-md-4 mb-3">
+                    <p className="text-label">State:</p>
+                    <p className="text-data">{user?.state}</p>
+                  </div>
+                  <div className="col-md-4 mb-3">
+                    <p className="text-label">Phone no:</p>
+                    <span>{getCountryFlag(user?.dial_code)}</span> {user?.dial_code} {user?.phone}
                   </div>
                 </div>
               </div>
               <div className='col-md-12'>
-                <div className='d-inline-block mt-4'>
+                <div className='d-flex gap-3 mt-4'>
                   <CustomButton
-                    text="Newsfeed"
+                    text="View Webinar"
+                  />
+                  <CustomButton
+                    className="customButtonBor"
+                    text="View Services"
                   />
                 </div>
               </div>
@@ -197,11 +210,37 @@ const UserDetails = ({ filters,
         </div>
       </div>
       <div className="d-card py-45 mb-45">
-        <h2 className="screen-title">Bookings</h2>
+        <div className="row">
+          <div className='col-md-12'>
+            <h2 className="screen-title">Certification Detail</h2>
+          </div>
+          <div className="col-md-6">
+            <div className="row">
+              <div className="col-md-4 mb-3">
+                <p className="text-label">Institute Name:</p>
+                <p className="text-data">{user?.institute_name}</p>
+              </div>
+              <div className="col-md-4 mb-3">
+                <p className="text-label">Certificate Title:</p>
+                <p className="text-data">{user?.certificate_title}</p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-4 mb-3">
+                <div className='certificateImg'>
+                  <img src={user?.avatar} alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="d-card py-45 mb-45">
+        <h2 className="screen-title">Appointment logs</h2>
         <Row>
           <Col xs={12}>
             <CustomTable
-              headers={bookingsHeaders}
+              headers={appointmentlogsHeaders}
 
               filters={filters}
               setFilters={setFilters}
@@ -218,7 +257,7 @@ const UserDetails = ({ filters,
               ]}
             >
               <tbody>
-                {bookingslogs?.map((item, index) => (
+                {appointmentlogs?.map((item, index) => (
                   <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.name}</td>
@@ -245,8 +284,8 @@ const UserDetails = ({ filters,
         description={`Are you sure you want to ${user?.is_active === 1 ? 'deactivate' : 'activate'
           } this user?`}
       />
-    </div >
+    </div>
   );
 };
 
-export default withModal(withFilters(UserDetails));
+export default withModal(withFilters(CoachDetails));

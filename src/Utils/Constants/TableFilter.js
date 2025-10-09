@@ -31,3 +31,8 @@ export const unlockRequestFilterOptions = [
   { value: '1', label: 'Pending' },
   { value: '2', label: 'Rejected' },
 ];
+export const requestFilterOptions = [
+  { value: '', label: 'All' },
+  { value: '0', label: 'Pending' },
+  { value: '1', label: 'Rejected' },
+];

@@ -152,7 +152,7 @@ ul.pagination {
 .pagination a:hover {
   transition: none;
   text-decoration: none;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   color: var(--pagination-hover-text-color) !important;
 }
 

@@ -16,7 +16,6 @@ const BackButton = ({ handleBack, url = '' }) => {
   return (
     <button className="backButton" onClick={handleBack || goBack}>
       <BsArrowLeft size={20} />
-      <p>Back</p>
     </button>
   );
 };
