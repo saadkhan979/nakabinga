@@ -45,6 +45,7 @@
 .modalText {
   color: #646464;
   margin: 0;
+  text-transform: capitalize;
 }
 .modalInputs .mainInput {
   background-color: #fff !important;

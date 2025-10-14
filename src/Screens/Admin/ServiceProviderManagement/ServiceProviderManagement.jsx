@@ -36,6 +36,7 @@ const ServiceProviderManagement = ({
   usePageTitle('Service Provider Management');
   const navigate = useNavigate();
   const [changeStatusModal, setChangeStatusModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [selectedObj, setSelectedObj] = useState(null);
   let queryClient = useQueryClient();
 
@@ -74,6 +75,7 @@ const ServiceProviderManagement = ({
       onSuccess: (data) => {
         showToast('Status updated successfully', 'success');
         setChangeStatusModal(false);
+        setShowSuccessModal(true);
         queryClient.invalidateQueries(['userListing', filters]);
       },
       onError: (error) => {
@@ -95,7 +97,7 @@ const ServiceProviderManagement = ({
           <h2 className="screen-title mb-0">Service Provider Management</h2>
           <CustomButton
             text="New Service Provider Request"
-            onClick={() => (navigate("service-provider-requests"))}
+            onClick={() => (navigate("requests"))}
           />
         </div>
         <Row>
@@ -181,11 +183,19 @@ const ServiceProviderManagement = ({
       <CustomModal
         show={changeStatusModal}
         close={() => setChangeStatusModal(false)}
-        disableClick={isStatusUpdating} // Disable action button during mutation
-        action={confirmStatusChange} // Perform status change on confirm
-        title={isStatusActive(selectedObj) ? 'Deactivate' : 'Activate'}
-        description={`Are you sure, you want to ${isStatusActive(selectedObj) ? 'deactivate' : 'activate'
-          } this coach?`}
+        disableClick={isStatusUpdating}
+        action={confirmStatusChange}
+        description={`Are You Sure, You Want To ${isStatusActive(selectedObj) ? 'Inactivated' : 'Activated'
+          } This Service Provider?`}
+      />
+
+      <CustomModal
+        show={showSuccessModal}
+        close={() => setShowSuccessModal(false)}
+        variant="success"
+        title="Success"
+        description={`Service Provider has been ${isStatusActive(selectedObj) ? 'Inactivated' : 'Activated'
+          } Successfully.`}
       />
     </>
   );

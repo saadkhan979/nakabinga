@@ -21,6 +21,9 @@ import CoachCategory from './CoachCategory/CoachCategory';
 import AddCoach from './CoachCategory/AddCoach';
 import CoachDetail from './CoachCategory/CoachDetail';
 import EditCoach from './CoachCategory/EditCoach';
+import ServiceProviderDetails from './ServiceProviderManagement/ServiceProviderDetails';
+import ServiceProvidersRequests from './ServiceProviderManagement/ServiceProvidersRequests';
+import ServiceProvidersRequestsDetails from './ServiceProviderManagement/ServiceProvidersRequestsDetails';
 
 const AdminRoutes = () => {
   return (
@@ -35,6 +38,9 @@ const AdminRoutes = () => {
       <Route path="coach-management/coach-requests/:id" element={<CoachRequestsDetails />} />
 
       <Route path="service-provider-management" element={<ServiceProviderManagement />} />
+      <Route path="service-provider-management/:id" element={<ServiceProviderDetails />} />
+      <Route path="service-provider-management/requests" element={<ServiceProvidersRequests />} />
+      <Route path="service-provider-management/requests/:id" element={<ServiceProvidersRequestsDetails />} />
 
       <Route path="service-provider-category" element={<ServiceProviderCategory />} />
       <Route path="service-provider-category/:id" element={<ServiceProviderCategoryDetail />} />

@@ -39,6 +39,7 @@ export const coachRequestsHeaders = [
   'status',
   'action',
 ];
+
 export const serviceProviderManagementHeaders = [
   'S. No.',
   'service provider Name',
@@ -53,4 +54,11 @@ export const serviceProviderCategoryHeaders = [
   'date',
   'status',
   'action',
+];
+export const spmRequestsHeaders = [
+  'S. No.',
+  'Service Provider Name',
+  'Uploaded Date',
+  'Status',
+  'Action',
 ];

@@ -21,8 +21,8 @@ import { Formik, Form } from 'formik';
 import { reasonValidationSchema } from '../../../Utils/Validations/ValidationSchemas';
 import CustomInput from '../../../Components/CustomInput';
 
-const CoachRequestsDetails = () => {
-  usePageTitle('Coach profile');
+const ServiceProvidersRequestsDetails = () => {
+  usePageTitle('Service Provider Profile');
   const { id } = useParams();
   const navigate = useNavigate();
   let queryClient = useQueryClient();
@@ -116,7 +116,7 @@ const CoachRequestsDetails = () => {
     <div>
       <div className="d-flex align-items-start mb-4 justify-content-between flex-wrap">
         <div className="d-flex flex-column gap-2">
-          <h2 className="screen-title m-0 d-inline"><BackButton /> Coach Profile</h2>
+          <h2 className="screen-title m-0 d-inline"><BackButton /> Service Provider Profile</h2>
         </div>
       </div>
       <div className="d-card py-45 mb-45">
@@ -255,11 +255,11 @@ const CoachRequestsDetails = () => {
         show={changeStatusModal}
         close={() => setChangeStatusModal(false)}
         disableClick={isStatusUpdating}
-        title={pendingAction === 'approve' ? 'Approve Coach' : 'Reject Coach'}
+        // title={pendingAction === 'approve' ? 'Approve Coach' : 'Reject Coach'}
         description={
           pendingAction === 'approve'
-            ? 'Are you sure you want to approve this Coach?'
-            : 'Are you sure you want to reject this Coach?'
+            ? 'Are you sure you want to approve this provider?'
+            : 'Are you sure you want to reject this provider?'
         }
         action={() => {
           if (pendingAction === 'approve') {
@@ -277,10 +277,10 @@ const CoachRequestsDetails = () => {
         close={() => setShowSuccessModal(false)}
         variant="success"
         title="Success"
-        description={`Coach has been ${pendingAction === 'rejected' ? 'rejected' : 'approved'
+        description={`provider has been ${pendingAction === 'rejected' ? 'rejected' : 'approved'
           } successfully.`}
         action={() => {
-          navigate("/admin/coach-management/coach-requests");
+          navigate("/admin/service-provider-management/requests");
         }}
       />
       <CustomModal
@@ -332,4 +332,4 @@ const CoachRequestsDetails = () => {
   );
 };
 
-export default withModal(withFilters(CoachRequestsDetails));
+export default withModal(withFilters(ServiceProvidersRequestsDetails));

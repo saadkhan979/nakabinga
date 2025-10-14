@@ -212,5 +212,3 @@ const EditCategory = ({ showModal, closeModal }) => {
 };
 
 export default withModal(EditCategory);
-
-ServiceProviderManagement, ServiceProviderCategory, CoachCategory

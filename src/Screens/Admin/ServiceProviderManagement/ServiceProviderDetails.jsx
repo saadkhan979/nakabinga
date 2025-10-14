@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import BackButton from '../../../Components/BackButton';
 import CustomButton from '../../../Components/CustomButton';
 import CustomModal from '../../../Components/CustomModal';
@@ -14,7 +14,7 @@ import {
   getListingB,
   updateStatus,
   viewUser,
-} from '../../../Services/Admin/CoachManagement';
+} from '../../../Services/Admin/ServiceProviderManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
 import { appointmentlogsHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, getCountryFlag } from '../../../Utils/Utils';
@@ -25,14 +25,15 @@ import withModal from '../../../HOC/withModal';
 import withFilters from '../../../HOC/withFilters ';
 import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
 
-const CoachDetails = ({
+const ServiceProviderDetails = ({
   filters,
   setFilters,
   pagination,
   updatePagination,
 }) => {
-  usePageTitle('Coach profile');
+  usePageTitle('Service Provider Profile');
   const [changeStatusModal, setChangeStatusModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const { id } = useParams();
   let queryClient = useQueryClient();
 
@@ -43,6 +44,7 @@ const CoachDetails = ({
       onSuccess: (data) => {
         showToast('Status updated successfully', 'success');
         setChangeStatusModal(false);
+        setShowSuccessModal(true);
         queryClient.invalidateQueries(['userDetails', id]);
       },
       onError: (error) => {
@@ -128,7 +130,7 @@ const CoachDetails = ({
     <div>
       <div className="d-flex align-items-start mb-4 justify-content-between flex-wrap">
         <div className="d-flex flex-column gap-2">
-          <h2 className="screen-title m-0 d-inline"><BackButton /> Coach Profile</h2>
+          <h2 className="screen-title m-0 d-inline"><BackButton /> Service Provider Profile</h2>
         </div>
       </div>
       <div className="d-card py-45 mb-45">
@@ -188,23 +190,28 @@ const CoachDetails = ({
             </div>
           </div>
 
-          <div className="col-md-2 d-flex justify-content-end">
-            <div className='d-lg-inline-block'>
-              <p className="text-label">
-                Status:{' '}
-                <span
-                  className={`status ${statusClassMap[user?.is_active === 1 ? "Active" : "Inactive"]}`} // change with user status
-                >
-                  {user?.is_active === 1 ? "Active" : "Inactive"}
-                </span>
-              </p>
-              <CustomButton
-                onClick={() => setChangeStatusModal(true)}
-                className="bg-success"
-                text={
-                  user?.is_active === 1 ? 'Deactivate' : 'Activate'
-                }
-              />
+          <div className="col-md-2">
+            <div className='d-flex justify-content-end'>
+              <div className='d-lg-inline-block'>
+                <p className="text-label">
+                  Status:{' '}
+                  <span
+                    className={`status ${statusClassMap[user?.is_active === 1 ? "Active" : "Inactive"]}`} // change with user status
+                  >
+                    {user?.is_active === 1 ? "Active" : "Inactive"}
+                  </span>
+                </p>
+                <CustomButton
+                  onClick={() => setChangeStatusModal(true)}
+                  className="bg-success"
+                  text={
+                    user?.is_active === 1 ? 'Deactivate' : 'Activate'
+                  }
+                />
+              </div>
+            </div>
+            <div className='mt-3'>
+              <Link to="#" className='customButton'>View Rating & Reviews</Link>
             </div>
           </div>
         </div>
@@ -275,7 +282,7 @@ const CoachDetails = ({
           </Col>
         </Row>
       </div>
-      <CustomModal
+      {/* <CustomModal
         show={changeStatusModal}
         close={() => setChangeStatusModal(false)}
         action={handleStatusChange}
@@ -283,9 +290,28 @@ const CoachDetails = ({
         title={user?.is_active === 1 ? 'Deactivate' : 'Activate'}
         description={`Are you sure you want to ${user?.is_active === 1 ? 'deactivate' : 'activate'
           } this user?`}
+      /> */}
+      <CustomModal
+        show={changeStatusModal}
+        close={() => setChangeStatusModal(false)}
+        disableClick={isStatusUpdating}
+        action={handleStatusChange}
+        description={`Are You Sure, You Want To ${user?.is_active === 1 ? 'Inactivated' : 'Activated'
+          } This Service Provider?`}
       />
+
+      <CustomModal
+        show={showSuccessModal}
+        close={() => setShowSuccessModal(false)}
+        variant="success"
+        title="Success"
+        description={`Service Provider has been ${user?.is_active === 1 ? 'Inactivated' : 'Activated'
+          } Successfully.`}
+      />
+
+
     </div>
   );
 };
 
-export default withModal(withFilters(CoachDetails));
+export default withModal(withFilters(ServiceProviderDetails));

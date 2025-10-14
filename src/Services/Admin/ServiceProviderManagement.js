@@ -16,9 +16,12 @@ export const getListing = async (params) => {
 };
 export const getRequestsListing = async (params) => {
   try {
-    const { data } = await axiosInstance.get('/admin/coach/request', {
-      params,
-    });
+    const { data } = await axiosInstance.get(
+      '/admin/service-providers/request',
+      {
+        params,
+      }
+    );
     return data; // Assume this returns the listing object
   } catch (error) {
     throw error.response
@@ -29,7 +32,9 @@ export const getRequestsListing = async (params) => {
 
 export const updateStatus = async (id) => {
   try {
-    const response = await axiosInstance.post(`/admin/coach/${id}/status`);
+    const response = await axiosInstance.post(
+      `/admin/service-providers/${id}/status`
+    );
     const {
       data: { message, status },
     } = response;
@@ -40,29 +45,12 @@ export const updateStatus = async (id) => {
       : { message: 'Unknown error occurred' };
   }
 };
-// export const updateRequestsStatus = async (id, payload) => {
-//   try {
-//     const response = await axiosInstance.post(
-//       `/admin/coach/${id}/update-request`,
-//       payload // ✅ send status/reason here
-//     );
 
-//     const {
-//       data: { message, status },
-//     } = response;
-
-//     return { message, status };
-//   } catch (error) {
-//     throw error.response
-//       ? error.response.data
-//       : { message: 'Unknown error occurred' };
-//   }
-// };
 // Services/Admin/CoachManagement.js
 export const updateRequestsStatus = async (id, payload) => {
   try {
     const response = await axiosInstance.post(
-      `/admin/coach/${id}/update-request`,
+      `/admin/service-providers/${id}/update-request`,
       payload // <-- ensure the payload is sent in the body
     );
 
@@ -79,7 +67,7 @@ export const updateRequestsStatus = async (id, payload) => {
 // DETAILS
 export const viewUser = async (id) => {
   try {
-    const { data } = await axiosInstance.get(`/admin/coach/${id}`);
+    const { data } = await axiosInstance.get(`/admin/service-providers/${id}`);
     return data.data; // Assume this returns success obj
   } catch (error) {
     throw error.response

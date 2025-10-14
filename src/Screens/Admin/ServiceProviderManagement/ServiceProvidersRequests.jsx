@@ -21,12 +21,12 @@ import {
 } from '../../../Services/Admin/CoachManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
 import { requestFilterOptions } from '../../../Utils/Constants/TableFilter';
-import { coachRequestsHeaders } from '../../../Utils/Constants/TableHeaders';
+import { spmRequestsHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, serialNum, showErrorToast } from '../../../Utils/Utils';
 import CustomButton from '../../../Components/CustomButton';
 import BackButton from '../../../Components/BackButton';
 
-const CoachRequests = ({
+const ServiceProvidersRequests = ({
   showModal,
   closeModal,
   filters,
@@ -34,7 +34,7 @@ const CoachRequests = ({
   pagination,
   updatePagination,
 }) => {
-  usePageTitle('New Coach Requests');
+  usePageTitle('New Service Providers Requests');
   const navigate = useNavigate();
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const [selectedObj, setSelectedObj] = useState(null);
@@ -93,14 +93,14 @@ const CoachRequests = ({
     <>
       <section>
         <div className="d-flex justify-content-between flex-wrap mb-3">
-          <h3 className="screen-title mb-0"><BackButton /> New Coach Requests</h3>
+          <h3 className="screen-title mb-0"><BackButton /> New Service Providers Requests</h3>
         </div>
         <Row>
           <Col xs={12}>
             <CustomTable
               filters={filters}
               setFilters={setFilters}
-              headers={coachRequestsHeaders}
+              headers={spmRequestsHeaders}
               pagination={pagination}
               isLoading={isLoading}
               selectOptions={[
@@ -117,7 +117,7 @@ const CoachRequests = ({
                 <tbody>
                   {isError && (
                     <tr>
-                      <td colSpan={coachRequestsHeaders.length}>
+                      <td colSpan={spmRequestsHeaders.length}>
                         <p className="text-danger mb-0">
                           Unable to fetch data at this time
                         </p>
@@ -187,4 +187,4 @@ const CoachRequests = ({
   );
 };
 
-export default withModal(withFilters(CoachRequests));
+export default withModal(withFilters(ServiceProvidersRequests));
