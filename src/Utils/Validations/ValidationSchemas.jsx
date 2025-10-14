@@ -92,3 +92,37 @@ export const reasonValidationSchema = Yup.object({
     .required('Reason is required')
     .max(200, 'Maximum 200 characters allowed'),
 });
+export const categoryValidationSchema = Yup.object({
+  name: Yup.string()
+    .trim()
+    .required("Category Title is required")
+    .max(100, "Category Title must be at most 100 characters"),
+
+  is_active: Yup.string()
+    .required("Status is required"),
+
+  image: Yup.mixed()
+    .required("Category picture is required")
+    .test("fileSize", "File size is too large", (value) => {
+      // 🧩 If no value, skip
+      if (!value) return false;
+
+      // 🧩 If API image (has url but no file) → allow up to 2MB (though usually not checked)
+      if (value.url && !value.file) {
+        return true; // skip validation for existing images
+      }
+
+      // 🧩 If uploaded image → max 5MB
+      if (value.file && value.file.size) {
+        return value.file.size <= 5 * 1024 * 1024; // 5MB limit
+      }
+
+      return false;
+    })
+    .test("fileType", "Unsupported file format", (value) => {
+      if (!value || !value.file) return true; // skip if existing image
+      return ["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(
+        value.file.type
+      );
+    }),
+});

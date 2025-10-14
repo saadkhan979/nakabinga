@@ -3,7 +3,22 @@ import Form from 'react-bootstrap/Form';
 import Styles from './style.module.css';
 
 const CustomSelect = (
-  { size = '', options = [], name, onChange, defaultValue, value, className, fullWidth, halfWidth, required, label, firstIsLabel, onBlur },
+  {
+    size = '',
+    options = [],
+    name,
+    onChange,
+    defaultValue,
+    value,
+    className,
+    fullWidth,
+    halfWidth,
+    required,
+    label,
+    firstIsLabel,
+    onBlur,
+    error,
+  },
   ref
 ) => {
   const handleSelectChange = (event) => {
@@ -16,7 +31,7 @@ const CustomSelect = (
   const selectOptions = firstIsLabel ? [{ value: '', label: options[0]?.label, disabled: true }, ...options.slice(1)] : options;
 
   return (
-    <div className={`${Styles.customSelect} ${fullWidth && Styles.fullWidth} ${halfWidth && Styles.halfWidth}`}>
+    <div className={`mb-3 ${Styles.customSelect} ${fullWidth && Styles.fullWidth} ${halfWidth && Styles.halfWidth}`}>
       {label && (
         <label htmlFor={name}>
           {label}
@@ -44,6 +59,7 @@ const CustomSelect = (
           </option>
         ))}
       </Form.Select>
+      {error && <div className="invalid-feedback d-block">{error}</div>}
     </div>
   );
 };

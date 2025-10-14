@@ -30,11 +30,9 @@ const TableActionDropDown = ({ actions = [], children, displaySeparator = true }
               <Dropdown.Item
                 key={i}
                 onClick={action.disabled ? undefined : action.onClick}
-                className={`${action.className} ${
-                  !action.className ? 'bg-hover' : ''
-                } d-flex align-items-center gap-2 ${
-                  action.disabled ? 'disabled' : ''
-                }`}
+                className={`${action.className} ${!action.className ? 'bg-hover' : ''
+                  } d-flex align-items-center gap-2 ${action.disabled ? 'disabled' : ''
+                  }`}
               >
                 <action.icon size={20} />
                 <span>{action.name}</span>
@@ -45,9 +43,8 @@ const TableActionDropDown = ({ actions = [], children, displaySeparator = true }
       ) : (
         <div className="d-flex cp gap-3 tableAction align-items-center justify-content-center">
           <span
-            className={`${actions?.[0].className}  ${
-              actions?.[0].disabled ? 'disabled' : 'tooltip-toggle'
-            }`}
+            className={`${actions?.[0].className}  ${actions?.[0].disabled ? 'disabled' : 'tooltip-toggle'
+              }`}
             aria-label={actions?.[0].name}
             onClick={actions?.[0].disabled ? undefined : actions?.[0].onClick}
             style={{
@@ -60,9 +57,8 @@ const TableActionDropDown = ({ actions = [], children, displaySeparator = true }
             <>
               {displaySeparator && <span>|</span>}
               <span
-                className={`${actions?.[1].className} ${
-                  actions?.[1].disabled ? 'disabled' : 'tooltip-toggle'
-                }`}
+                className={`${actions?.[1].className} ${actions?.[1].disabled ? 'disabled' : 'tooltip-toggle'
+                  }`}
                 aria-label={actions?.[1].name}
                 onClick={
                   actions?.[1].disabled ? undefined : actions?.[1].onClick

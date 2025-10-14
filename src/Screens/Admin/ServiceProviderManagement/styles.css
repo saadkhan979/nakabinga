@@ -1,0 +1,21 @@
+.detailsWrapper {
+  max-width: 80%;
+  flex-wrap: wrap;
+}
+.detailItem {
+  width: 210px;
+}
+.user-details {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 0 20px 0;
+}
+
+.user-details-placeholder {
+  font-size: 100px;
+  color: #999999;
+}

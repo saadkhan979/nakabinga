@@ -1,0 +1,9 @@
+.cUploadimage {
+    border: 1px solid var(--white-color);
+    border-radius: 50px;
+    padding: 7px 15px;
+    display: inline-flex;
+    margin: 15px 0 0 0;
+    align-items: center;
+    gap: 0.5rem;
+}

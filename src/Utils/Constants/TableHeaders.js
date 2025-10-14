@@ -39,3 +39,18 @@ export const coachRequestsHeaders = [
   'status',
   'action',
 ];
+export const serviceProviderManagementHeaders = [
+  'S. No.',
+  'service provider Name',
+  'email address',
+  'registration date',
+  'status',
+  'action',
+];
+export const serviceProviderCategoryHeaders = [
+  'S. No.',
+  'category Name',
+  'date',
+  'status',
+  'action',
+];

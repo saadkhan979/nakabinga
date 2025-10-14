@@ -12,6 +12,15 @@ import CoachManagement from './CoachManagement/CoachManagement';
 import CoachDetails from './CoachManagement/CoachDetails';
 import CoachRequests from './CoachManagement/CoachRequests';
 import CoachRequestsDetails from './CoachManagement/CoachRequestsDetails';
+import ServiceProviderManagement from './ServiceProviderManagement/ServiceProviderManagement';
+import ServiceProviderCategory from './ServiceProviderCategory/ServiceProviderCategory';
+import ServiceProviderCategoryDetail from './ServiceProviderCategory/ServiceProviderCategoryDetail';
+import AddCategory from './ServiceProviderCategory/AddCategory';
+import EditCategory from './ServiceProviderCategory/EditCategory';
+import CoachCategory from './CoachCategory/CoachCategory';
+import AddCoach from './CoachCategory/AddCoach';
+import CoachDetail from './CoachCategory/CoachDetail';
+import EditCoach from './CoachCategory/EditCoach';
 
 const AdminRoutes = () => {
   return (
@@ -24,6 +33,18 @@ const AdminRoutes = () => {
       <Route path="coach-management/:id" element={<CoachDetails />} />
       <Route path="coach-management/coach-requests" element={<CoachRequests />} />
       <Route path="coach-management/coach-requests/:id" element={<CoachRequestsDetails />} />
+
+      <Route path="service-provider-management" element={<ServiceProviderManagement />} />
+
+      <Route path="service-provider-category" element={<ServiceProviderCategory />} />
+      <Route path="service-provider-category/:id" element={<ServiceProviderCategoryDetail />} />
+      <Route path="service-provider-category/add" element={<AddCategory />} />
+      <Route path="service-provider-category/edit/:id" element={<EditCategory />} />
+
+      <Route path="coach-category" element={<CoachCategory />} />
+      <Route path="coach-category/:id" element={<CoachDetail />} />
+      <Route path="coach-category/add" element={<AddCoach />} />
+      <Route path="coach-category/edit/:id" element={<EditCoach />} />
 
       <Route path="*" element={<Navigate to="/admin/dashboard" />} />
     </Routes>

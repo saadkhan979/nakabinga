@@ -56,6 +56,11 @@ export const statusOptions = [
   { value: 'active', label: 'Active' },
   { value: 'inactive', label: 'Inactive' },
 ];
+export const statusNumberOptions = [
+  { value: 'All', label: 'All' },
+  { value: '1', label: 'Active' },
+  { value: '0', label: 'Inactive' },
+];
 
 export const sortingOptions = [
   {
