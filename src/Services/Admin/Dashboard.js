@@ -5,7 +5,6 @@ import { buildFormData } from '../../Utils/Utils';
 export const getDashboardData = async (params) => {
   try {
     const { data } = await axiosInstance.get('/admin/dashboard', { params });
-    console.log(data, 'data.data 888888888');
     return data.data; // Assume this returns the listing object
   } catch (error) {
     throw error.response

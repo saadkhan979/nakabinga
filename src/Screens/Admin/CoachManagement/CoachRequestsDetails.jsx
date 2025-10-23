@@ -69,7 +69,6 @@ const CoachRequestsDetails = () => {
 
   const handleSubmit = (values) => {
     handleStatusChange({ status: 'rejected', reason: values.reason });
-    console.log(values, "values999999");
   };
 
   if (isLoading) {

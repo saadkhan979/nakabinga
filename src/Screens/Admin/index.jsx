@@ -24,6 +24,29 @@ import EditCoach from './CoachCategory/EditCoach';
 import ServiceProviderDetails from './ServiceProviderManagement/ServiceProviderDetails';
 import ServiceProvidersRequests from './ServiceProviderManagement/ServiceProvidersRequests';
 import ServiceProvidersRequestsDetails from './ServiceProviderManagement/ServiceProvidersRequestsDetails';
+import ContentManagement from './ContentManagement/ContentManagement';
+import AddVideo from './ContentManagement/AddVideo';
+import EditVideo from './ContentManagement/EditVideo';
+import VideoDetail from './ContentManagement/VideoDetail';
+import AddEbook from './ContentManagement/AddEbook';
+import EditEbook from './ContentManagement/EditEbook';
+import EbookDetail from './ContentManagement/EbookDetail';
+import AddArticles from './ContentManagement/AddArticles';
+import EditArticles from './ContentManagement/EditArticles';
+import ArticlesDetail from './ContentManagement/ArticlesDetail';
+import LanguageManagement from './ContentManagement/LanguageManagement';
+import AddLanguage from './ContentManagement/AddLanguage';
+import LanguageDetail from './ContentManagement/LanguageDetail';
+import EditLanguage from './ContentManagement/EditLanguage';
+import CommissionManagement from './CommissionManagement/CommissionManagement';
+import SubscriptionLogs from './SubscriptionManagement/SubscriptionLogs';
+import SubscriptionPlan from './SubscriptionManagement/SubscriptionPlan';
+import AddPlan from './SubscriptionManagement/AddPlan';
+import EditPlan from './SubscriptionManagement/EditPlan';
+import PlaneDetail from './SubscriptionManagement/PlaneDetail';
+import Profile from '../Profile/Profile';
+import EditProfile from '../Profile/EditProfile';
+import ChangePassword from '../Profile/ChangePassword';
 
 const AdminRoutes = () => {
   return (
@@ -51,6 +74,36 @@ const AdminRoutes = () => {
       <Route path="coach-category/:id" element={<CoachDetail />} />
       <Route path="coach-category/add" element={<AddCoach />} />
       <Route path="coach-category/edit/:id" element={<EditCoach />} />
+
+      <Route path="content-management" element={<ContentManagement />} />
+      <Route path="content-management/add-videos" element={<AddVideo />} />
+      <Route path="content-management/edit-videos/:id" element={<EditVideo />} />
+      <Route path="content-management/videos/:id" element={<VideoDetail />} />
+
+      <Route path="content-management/add-ebooks" element={<AddEbook />} />
+      <Route path="content-management/edit-ebooks/:id" element={<EditEbook />} />
+      <Route path="content-management/ebooks/:id" element={<EbookDetail />} />
+
+      <Route path="content-management/add-articles" element={<AddArticles />} />
+      <Route path="content-management/edit-articles/:id" element={<EditArticles />} />
+      <Route path="content-management/articles/:id" element={<ArticlesDetail />} />
+
+      <Route path="content-management/language-management" element={<LanguageManagement />} />
+      <Route path="content-management/language-management/add-language" element={<AddLanguage />} />
+      <Route path="content-management/language-management/:id" element={<LanguageDetail />} />
+      <Route path="content-management/language-management/edit-language/:id" element={<EditLanguage />} />
+
+      <Route path="commission-management" element={<CommissionManagement />} />
+
+      <Route path="subscription-management" element={<SubscriptionLogs />} />
+      <Route path="subscription-management/subscription-plan" element={<SubscriptionPlan />} />
+      <Route path="subscription-management/subscription-plan/:id" element={<PlaneDetail />} />
+      <Route path="subscription-management/subscription-plan/add-plan" element={<AddPlan />} />
+      <Route path="subscription-management/subscription-plan/edit-plan/:id" element={<EditPlan />} />
+
+      <Route path="profile" element={<Profile />} />
+      <Route path="edit-profile" element={<EditProfile />} />
+      <Route path="change-password" element={<ChangePassword />} />
 
       <Route path="*" element={<Navigate to="/admin/dashboard" />} />
     </Routes>

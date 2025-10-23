@@ -50,6 +50,25 @@ export const formatNumber = (num) => {
   return num;
 };
 
+export const validateImage = (file) => {
+  const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+  const maxSize = 1024 * 1024; // 1MB
+
+  if (!file) {
+    return "No file selected.";
+  }
+
+  if (!allowedTypes.includes(file.type)) {
+    return "Unsupported file format.";
+  }
+
+  if (file.size > maxSize) {
+    return "File size exceeds 1MB limit.";
+  }
+
+  return true; // No errors
+};
+
 export const formatDate = (dateString = '', format = 'DD/MM/YYYY') => {
   if (!dateString) {
     return null;

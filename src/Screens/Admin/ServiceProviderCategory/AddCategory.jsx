@@ -45,7 +45,6 @@ const AddCategory = ({ showModal, closeModal }) => {
     });
 
     const handleSubmit = (values) => {
-        console.log(values, "values99999");
         showModal(
             "",
             "Are You Sure, You Want To Add Category?",

@@ -1,0 +1,7 @@
+.iconleft .right-icon {
+    left: 12px;
+    right: auto;
+}
+.iconleft .mainInput:has(+ .right-icon) {
+    padding-left: 1.7rem;
+}

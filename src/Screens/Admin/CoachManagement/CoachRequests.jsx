@@ -53,7 +53,6 @@ const CoachRequests = ({
     updatePagination,
     getRequestsListing
   );
-  console.log(userManagement, 'userManagement')
 
 
   if (isError) {

@@ -53,7 +53,6 @@ const CoachManagement = ({
     updatePagination,
     getListing
   );
-  console.log(userManagement, 'userManagement')
 
 
   if (isError) {

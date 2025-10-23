@@ -229,14 +229,22 @@
 }
 .text-label {
   color: var(--secondary-text-color);
-  margin: 0;
-  font-size: 14px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    text-transform: capitalize;
+    margin: 0;
 }
 .text-data {
   color: var(--primary-text-color);
-  margin-top: 4px;
+margin-top: 10px;
   font-size: 16px;
   margin-bottom: 0;
+  color: #666;
+  font-weight: 500;
+  line-height: 18px;
+  text-transform: capitalize;
 }
 .text-label {
   & span {

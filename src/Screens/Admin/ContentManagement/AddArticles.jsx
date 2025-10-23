@@ -1,0 +1,229 @@
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import BackButton from '../../../Components/BackButton';
+import CustomButton from '../../../Components/CustomButton';
+import CustomInput from '../../../Components/CustomInput';
+import CustomSelect from '../../../Components/CustomSelect';
+import ImageUploader from '../../../Components/ImageUploader/ImageUploader';
+import { showToast } from '../../../Components/Toast/Toast';
+import VideoUploader from '../../../Components/VideoUploader/VideoUploader';
+import withModal from '../../../HOC/withModal';
+import { usePageTitle } from '../../../Hooks/usePageTitle';
+import { addArticlesData, getLanguages } from '../../../Services/Admin/ContentManagement';
+import { statusNumberOptions } from '../../../Utils/Constants/SelectOptions';
+import { addArticlesValidationSchema } from '../../../Utils/Validations/ValidationSchemas';
+import "./styles.css";
+import FileUploader from '../../../Components/FileUploader/FileUploader';
+
+const AddArticles = ({ showModal, closeModal, setModalLoading }) => {
+    usePageTitle('Add Articles');
+    const navigate = useNavigate();
+
+    // Fetch languages list for dropdown
+    const { data: languagesData } = useQuery({
+        queryKey: ['languagesList'],
+        queryFn: getLanguages, // imported from ../../../Services/Admin/ContentManagement
+        staleTime: 5 * 60 * 1000, // cache 5 mins
+    });
+
+    // Format languages for CustomSelect
+    const languageOptions =
+        languagesData?.data?.map((lang) => ({
+            label: lang.name,
+            value: lang.id,
+        })) || [];
+
+    // React Query Mutation
+    const { mutate, isPending } = useMutation({
+        mutationFn: addArticlesData,
+        onSuccess: () => {
+            closeModal(); // Close any open modals
+            showToast('Articles has been added successfully!', 'success'); // ✅ Toast on success
+            showModal(
+                "",
+                "Articles has been added successfully!",
+                null,
+                "success",
+                () => navigate('/admin/content-management', { state: { activeTab: 'articles' } })
+            );
+        },
+        onError: (error) => {
+            closeModal();
+            showToast(error?.message);
+        },
+    });
+    const handleSubmit = (values) => {
+        const payload = {
+            title: values.title,
+            language_id: values.language_id,
+            is_active: values.is_active,
+            description: values.description,
+            image: values.thumbnail.file,
+            content: values.file.file,
+        };
+        showModal(
+            "",
+            "Are You Sure, You Want To Add Articles?",
+            () => {
+                setModalLoading(true); // ✅ Start loader on Yes button
+                mutate(payload, {
+                    onSettled: () => setModalLoading(false), // ✅ Stop loader after API call
+                });
+            },
+            "warning",
+            null,
+        );
+    };
+
+    return (
+        <div className='d-card py-45 mb-45'>
+            <div className="d-flex align-items-start mb-4 justify-content-between flex-wrap">
+                <div className="d-flex gap-2">
+                    <BackButton url="/admin/content-management" state={{ activeTab: 'articles' }} />
+                    <h3 className="screen-title m-0 d-inline">Add Articles</h3>
+                </div>
+            </div>
+
+            <div className="">
+                <Formik
+                    initialValues={{
+                        title: "",
+                        language_id: "",
+                        is_active: "",
+                        description: "",
+                        thumbnail: "",
+                        file: "",
+                    }}
+                    validationSchema={addArticlesValidationSchema}
+                    onSubmit={handleSubmit}
+                >
+                    {({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue }) => (
+                        <form onSubmit={handleSubmit} className="category-wrap">
+                            <div className="row">
+                                <div className="col-md-8 col-lg-6 col-xl-4 col-xxl-4">
+                                    <CustomInput
+                                        label="Articles Title"
+                                        labelclass="mainLabel"
+                                        type="text"
+                                        required
+                                        placeholder="Enter Articles Title"
+                                        inputClass="mainInput"
+                                        id="title"
+                                        value={values.title}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        error={touched.title && errors.title}
+                                    />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-8 col-lg-6 col-xl-4 col-xxl-4">
+                                    <CustomSelect
+                                        label="Language"
+                                        required
+                                        name="language_id"
+                                        options={languageOptions}
+                                        firstIsLabel={true}
+                                        fullWidth
+                                        className="mainInput"
+                                        extraClass="w-100"
+                                        onChange={(e) => setFieldValue('language_id', e.target.value)}
+                                        value={values.language_id}
+                                        onBlur={handleBlur}
+                                        error={touched.language_id && errors.language_id}
+                                    />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-8 col-lg-6 col-xl-4 col-xxl-4">
+                                    <CustomSelect
+                                        label="Status"
+                                        required
+                                        name="is_active"
+                                        options={statusNumberOptions}
+                                        firstIsLabel={true}
+                                        fullWidth
+                                        className="mainInput"
+                                        extraClass="w-100"
+                                        onChange={handleChange}
+                                        value={values.is_active}
+                                        onBlur={handleBlur}
+                                        error={touched.is_active && errors.is_active}
+                                    />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-8 col-lg-6 col-xl-4 col-xxl-4">
+                                    <CustomInput
+                                        label="Description"
+                                        labelclass="mainLabel"
+                                        type="textarea"
+                                        required
+                                        placeholder="Enter Description"
+                                        inputClass="mainInput rounded-4"
+                                        id="description"
+                                        rows={6}
+                                        value={values.description}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        error={touched.description && errors.description}
+                                    />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                    <ImageUploader
+                                        label="Upload E-book Image"
+                                        required={true}
+                                        image={values.thumbnail}
+                                        onChange={(fileObj) => setFieldValue("thumbnail", fileObj)} // 👈 Update Formik
+                                        height="252px"
+                                        className="inputWrapper"
+                                        uploadImage="Upload Image"
+                                        error={touched.thumbnail && errors.thumbnail}
+                                    />
+                                </div>
+                                <div className="col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                    <FileUploader
+                                        label="Upload E-Book File"
+                                        required
+                                        file={values.file}
+                                        onChange={(fileObj) => setFieldValue("file", fileObj)} // 👈 Correct field name
+                                        height="252px"
+                                        className="inputWrapper"
+                                        uploadText="Upload File"
+                                        accept=".pdf,.epub,.doc,.docx,.txt" // 👈 limit to document formats
+                                        error={touched.file && errors.file}
+                                        showPreview={true} // 👈 Disable preview for docs (optional)
+                                    />
+                                </div>
+                                <div className='col-md-12'>
+                                    <p className="text-label mb-3">Limit: 1 File & 1 Image at a Time</p>
+
+                                </div>
+                            </div>
+                            <div className="row ">
+                                <div className="col-md-12">
+                                    <div className="d-flex">
+                                        <CustomButton
+                                            variant="primeryButton"
+                                            className="px-5"
+                                            text="Add E-Book"
+                                            pendingText="Submitting..."
+                                            isPending={isPending} // ✅ Mutation pending state
+                                            type="submit"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    )}
+                </Formik >
+            </div >
+        </div >
+    );
+};
+
+export default withModal(AddArticles);
+

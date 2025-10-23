@@ -10,9 +10,9 @@
   margin-left: 4px;
   color: var(--input-label-color);
   font-size: 16px;
-  font-style: normal;
-  /* user-select: none; */
   transition: color 0.2s;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 .mainInput::placeholder {
   color: var(--secondary-text-color);

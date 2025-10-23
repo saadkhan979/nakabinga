@@ -53,9 +53,6 @@ const ServiceProvidersRequests = ({
     updatePagination,
     getRequestsListing
   );
-  console.log(userManagement, 'userManagement')
-
-
   if (isError) {
     showErrorToast(error);
   }

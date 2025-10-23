@@ -29,6 +29,7 @@ const CustomModal = ({
   btn2Text,
   disableClick,
   style,
+  loading,
 }) => {
   const renderImage = (type) => {
     switch (type) {
@@ -133,9 +134,20 @@ const CustomModal = ({
                       <>
                         <CustomButton
                           type="button"
-                          text={btn1Text || 'Yes'}
+                          // text={btn1Text || 'Yes'}
+                          text={
+                            loading ? (
+                              <>
+                                <span className="spinner-border spinner-border-sm me-2"></span>
+                                Uploading...
+                              </>
+                            ) : (
+                              btn1Text || 'Yes'
+                            )
+                          }
                           className="modalPrimaryButton modal-btn"
                           onClick={action}
+                          disabled={loading} // 🟢 disable during loading
                         />
                         <CustomButton
                           type="button"

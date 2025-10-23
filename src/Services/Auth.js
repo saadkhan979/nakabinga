@@ -141,8 +141,6 @@ export const setUserId = async (id) => {
 export const loginAdmin = async (credentials) => {
   try {
     const response = await axiosInstance.post('/admin/login', credentials);
-
-    console.log(response, '123');
     const token = response.data.data.access_token;
     const role = response.data.data.user.role;
     const status = response.status;
@@ -159,7 +157,7 @@ export const logoutAdmin = async () => {
   try {
     const response = await axiosInstance.post('/logout');
 
-    if (!response.data.status) {
+    if (!response.status) {
       throw new Error('Error logging out', response);
     }
     // return { token, role, user, status }; // Assume this returns the user object

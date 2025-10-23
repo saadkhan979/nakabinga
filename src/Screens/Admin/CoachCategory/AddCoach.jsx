@@ -10,7 +10,7 @@ import CustomSelect from '../../../Components/CustomSelect';
 import { showToast } from '../../../Components/Toast/Toast';
 import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
-import { addData } from '../../../Services/Admin/ServiceProviderCategory';
+import { addData } from '../../../Services/Admin/CoachCategory';
 import { statusNumberOptions } from '../../../Utils/Constants/SelectOptions';
 import { categoryValidationSchema } from '../../../Utils/Validations/ValidationSchemas';
 import "./styles.css";
@@ -45,7 +45,6 @@ const AddCoach = ({ showModal, closeModal }) => {
     });
 
     const handleSubmit = (values) => {
-        console.log(values, "values99999");
         showModal(
             "",
             "Are You Sure, You Want To Add Coach?",

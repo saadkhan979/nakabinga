@@ -24,7 +24,6 @@ const AdminScreens = lazy(() => import('./Screens/Admin/index'));
 
 // Other individual components
 const Dashboard = lazy(() => import('./Screens/Dashboard/Dashboard'));
-const AdminProfile = lazy(() => import('./Screens/Profile/AdminProfile'));
 const Profile = lazy(() => import('./Screens/Profile/Profile'));
 const Notifications = lazy(() => import('./Screens/Admin/Notifications/Notifications'));
 const Preferences = lazy(() => import('./Screens/Theme/Preferences'));
@@ -67,7 +66,6 @@ function App() {
           {/* Authenticated Routes Admin */}
           <Route element={isAuthenticated ? <AppLayout /> : <Navigate to="/admin/login" />}>
             {/* <Route path="profile" element={<Profile />} />
-            <Route path="admin/profile" element={<AdminProfile />} />
             <Route path="notifications" element={<Notifications />} />*/}
             {/* Admin Routes - use the grouped component for admin routes */}
             {role === 'admin' && (

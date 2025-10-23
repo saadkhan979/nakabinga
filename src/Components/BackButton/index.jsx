@@ -2,12 +2,12 @@ import { BsArrowLeft } from 'react-icons/bs';
 import { useNavigate } from 'react-router';
 import './style.css';
 
-const BackButton = ({ handleBack, url = '' }) => {
+const BackButton = ({ handleBack, url = '', state = {} }) => {
   const navigate = useNavigate();
 
   const goBack = () => {
     if (url) {
-      navigate(url);
+      navigate(url, { state });
     } else {
       navigate(-1);
     }

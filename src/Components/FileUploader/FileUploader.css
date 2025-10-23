@@ -1,0 +1,14 @@
+.cUploadFile {
+    border: 1px solid var(--white-color);
+    border-radius: 50px;
+    padding: 0;
+    gap: 0.5rem;
+    height: 50px;
+    width: 50px;
+    background: #012032;
+    color: var(--contrast-text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 13px;
+}

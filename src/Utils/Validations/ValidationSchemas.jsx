@@ -69,7 +69,6 @@ export const adminLoginValidationSchema = Yup.object().shape({
 export const editAdminProfileSchema = Yup.object({
   first_name: Yup.string().required('First name is required'),
   last_name: Yup.string().required('Last name is required'),
-  country_code: Yup.string().required('Country Code is required'),
   phone: Yup.string().required('Phone Number is required'),
 });
 export const editProfileSchema = Yup.object({
@@ -78,13 +77,12 @@ export const editProfileSchema = Yup.object({
   phone: Yup.string().required('Phone Number is required'),
 });
 export const changePasswordSchema = Yup.object({
-  current_password: Yup.string().required('Current Password is required'),
-  password: Yup.string().required('New Password is required'),
-  password_confirmation: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords do not match')
+  old_password: Yup.string().required('Current Password is required'),
+  new_password: Yup.string().required('New Password is required'),
+  confirm_password: Yup.string()
+    .oneOf([Yup.ref('new_password'), null], 'Passwords do not match')
     .required('Please re-enter your new password'),
 });
-
 
 
 export const reasonValidationSchema = Yup.object({
@@ -125,4 +123,161 @@ export const categoryValidationSchema = Yup.object({
         value.file.type
       );
     }),
+});
+
+export const addVideoValidationSchema = Yup.object({
+  title: Yup.string()
+    .trim()
+    .required("Video title is required")
+    .max(100, "Title must be under 100 characters"),
+
+  description: Yup.string()
+    .trim()
+    .required("Description is required")
+    .max(500, "Description must be under 500 characters"),
+
+  is_active: Yup.number()
+    .required("Status is required")
+    .oneOf([0, 1], "Invalid status"),
+
+  language_id: Yup.string()
+    .required("Language is required"),
+
+  thumbnail: Yup.mixed()
+    .required("Thumbnail image is required")
+    .test("fileType", "Only image files are allowed", (value) => {
+      // ✅ Allow if existing URL or new image file
+      if (!value) return false;
+      if (value.url && !value.file) return true; // existing image
+      return value.file && value.file.type.startsWith("image/");
+    }),
+
+  video: Yup.mixed()
+    .required("Video file is required")
+    .test("fileType", "Only video files are allowed", (value) => {
+      if (!value) return false;
+
+      // ✅ Allow existing video URL
+      if (value.url && !value.file) return true;
+
+      // ✅ Allow new uploaded video file
+      if (value.file && value.file.type) {
+        return value.file.type.startsWith("video/");
+      }
+
+      return false;
+    }),
+});
+
+export const addEbookValidationSchema = Yup.object({
+  title: Yup.string()
+    .trim()
+    .required("E-book title is required")
+    .max(100, "Title must be under 100 characters"),
+
+  description: Yup.string()
+    .trim()
+    // .required("Description is required")
+    .max(500, "Description must be under 500 characters"),
+
+  is_active: Yup.number()
+    .required("Status is required")
+    .oneOf([0, 1], "Invalid status"),
+
+  language_id: Yup.string()
+    .required("Language is required"),
+
+  thumbnail: Yup.mixed()
+    .required("Upload E-book image is required")
+    .test("fileType", "Only image files are allowed", (value) => {
+      // ✅ Allow if existing URL or new image file
+      if (!value) return false;
+      if (value.url && !value.file) return true; // existing image
+      return value.file && value.file.type.startsWith("image/");
+    }),
+
+  file: Yup.mixed()
+    .required("E-book file is required")
+    .test("fileType", "Only document files are allowed", (value) => {
+      if (!value) return false;
+      if (value.url && !value.file) return true; // existing file from server
+      if (value.file && value.file.type) {
+        return [
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "text/plain",
+          "application/epub+zip",
+        ].includes(value.file.type);
+      }
+      return false;
+    }),
+});
+export const addArticlesValidationSchema = Yup.object({
+  title: Yup.string()
+    .trim()
+    .required("Articles title is required")
+    .max(100, "Title must be under 100 characters"),
+
+  description: Yup.string()
+    .trim()
+    .required("Description is required")
+    .max(500, "Description must be under 500 characters"),
+
+  is_active: Yup.number()
+    .required("Status is required")
+    .oneOf([0, 1], "Invalid status"),
+
+  language_id: Yup.string()
+    .required("Language is required"),
+
+  thumbnail: Yup.mixed()
+    .required("Upload Articles image is required")
+    .test("fileType", "Only image files are allowed", (value) => {
+      // ✅ Allow if existing URL or new image file
+      if (!value) return false;
+      if (value.url && !value.file) return true; // existing image
+      return value.file && value.file.type.startsWith("image/");
+    }),
+
+  file: Yup.mixed()
+    .required("Articles file is required")
+    .test("fileType", "Only document files are allowed", (value) => {
+      if (!value) return false;
+      if (value.url && !value.file) return true; // existing file from server
+      if (value.file && value.file.type) {
+        return [
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "text/plain",
+          "application/epub+zip",
+        ].includes(value.file.type);
+      }
+      return false;
+    }),
+});
+export const addLanguageValidationSchema = Yup.object({
+  name: Yup.string()
+    .trim()
+    .required("Language is required")
+    .max(100, "Language must be under 100 characters"),
+
+  is_active: Yup.number()
+    .required("Status is required")
+    .oneOf([0, 1], "Invalid status"),
+});
+export const commissionValidationSchema = Yup.object({
+  commission_rate: Yup.number()
+    .typeError('Commission rate must be a number')
+    .min(0, 'Commission rate cannot be negative')
+    .max(100, 'Commission rate cannot exceed 100%')
+    .required('Commission rate is required'),
+});
+export const addPlanValidationSchema = Yup.object({
+  name: Yup.string().required('Plan name is required'),
+  duration: Yup.string().required('Duration is required'),
+  category: Yup.string().required('Category is required'),
+  price: Yup.number().required('Price is required').positive('Price must be positive'),
+  description: Yup.string().required('Description is required'),
 });

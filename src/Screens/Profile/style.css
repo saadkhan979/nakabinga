@@ -1,0 +1,46 @@
+.adminProfileImage img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+.imageUploadButton {
+    font-size: 16px;
+    background: var(--btn-primary-color);
+    color: #fff;
+    border-radius: 99px;
+    width: 35px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    cursor: pointer;
+}
+
+.adminProfileImage {
+    width: 160px;
+    height: 160px;
+    position: relative;
+}
+
+.adminProfileImage img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.adminProfileImage label.imageUploadButton {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.adminProfileImage label.imageUploadButton svg {
+    cursor: pointer;
+}

@@ -12,6 +12,7 @@ const withModal = (WrappedComponent) => {
       postAction: null, // Function to be called after modal is closed
       showReason: false,
       errorMessage: '', // For error messages
+      loading: false, // 🟢 NEW
     });
 
     const showModal = (
@@ -19,7 +20,8 @@ const withModal = (WrappedComponent) => {
       description,
       action,
       variant = 'info',
-      postAction = null
+      postAction = null,
+      loading = false // 🟢 NEW
     ) => {
       setModalState({
         title,
@@ -28,6 +30,7 @@ const withModal = (WrappedComponent) => {
         variant,
         show: true,
         postAction, // Set postAction
+        loading, // 🟢 NEW
       });
     };
 
@@ -36,6 +39,11 @@ const withModal = (WrappedComponent) => {
       if (modalState.postAction) {
         modalState.postAction(); // Execute the postAction after closing the modal
       }
+    };
+
+    // 🟢 Helper to update loading state
+    const setModalLoading = (value) => {
+      setModalState((prev) => ({ ...prev, loading: value }));
     };
 
     const handleSubmit = () => {
@@ -51,6 +59,7 @@ const withModal = (WrappedComponent) => {
           {...props}
           showModal={showModal}
           closeModal={handleModalClose}
+          setModalLoading={setModalLoading} // 🟢 pass to wrapped component
         />
         <CustomModal
           show={modalState.show}
@@ -62,6 +71,7 @@ const withModal = (WrappedComponent) => {
           // btnText={'Submit'}
           btnText={modalState.variant === 'success' ? 'Login' : 'Submit'}
           errorMessage={modalState.errorMessage}
+          loading={modalState.loading} // 🟢 PASS DOWN
         />
       </>
     );
@@ -69,13 +79,3 @@ const withModal = (WrappedComponent) => {
 };
 
 export default withModal;
-
-//Example-1 for just confirmation
-
-// const confirmPopup = (id, status) => {
-//   showModal(
-//     `Are you sure you want to ${status === "Active" ? "Inactivate" : "Activate"} this User?`, //heading
-//1-     () => onConfirm(status, id) //action
-//2-     () => navigate(`/dashboard`) // If you want direct navigate without any confirmation just use navigate do not use 2 actions
-//   );
-// };

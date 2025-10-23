@@ -62,3 +62,74 @@ export const spmRequestsHeaders = [
   'Status',
   'Action',
 ];
+export const contentManagementHeadersMap = {
+  videos: [
+    'S. No.',
+    'Video Title',
+    'Language Name',
+    'Added On',
+    'Status',
+    'Action',
+  ],
+  ebooks: [
+    'S. No.',
+    'E-Book Title',
+    'Language Name',
+    'Added On',
+    'Status',
+    'Action',
+  ],
+  articles: [
+    'S. No.',
+    'Article Title',
+    'Language Name',
+    'Added On',
+    'Status',
+    'Action',
+  ],
+};
+export const languageManagementHeaders = [
+  'S. No.',
+  'Language Name',
+  'Date',
+  'Status',
+  'Action',
+];
+export const commissionHeadersMap = {
+  service_provider: ['S. No.', 'Commission rate', 'update date'],
+  coach: ['S. No.', 'Commission rate', 'update date'],
+  webinar: ['S. No.', 'Commission rate', 'update date'],
+  workshop: ['S. No.', 'Commission rate', 'update date'],
+};
+export const subscriptionHeadersMap = {
+  service_provider_course: [
+    'S. No.',
+    'full Name',
+    'email address',
+    'Plan name',
+    'price',
+    'purchase date',
+    'expiry date',
+    'status',
+  ],
+  user: [
+    'S. No.',
+    'full Name',
+    'email address',
+    'Plan name',
+    'price',
+    'purchase date',
+    'expiry date',
+    'status',
+  ],
+};
+export const subscriptionplanHeaders = [
+  'S. No.',
+  'Category',
+  'Subscription title',
+  'price',
+  'Creation Date',
+  'Last modify',
+  'status',
+  'action',
+];

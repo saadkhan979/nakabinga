@@ -34,7 +34,6 @@ const EditCoach = ({ showModal, closeModal }) => {
         refetchOnWindowFocus: false,
         retry: 1,
     });
-    console.log(fetchedData, "fetchedData77777777777");
 
     // ✅ Mutation for editing
     const { mutate, isPending } = useMutation({

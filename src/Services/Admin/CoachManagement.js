@@ -4,7 +4,7 @@ import { buildFormData } from '../../Utils/Utils';
 // GET
 export const getListing = async (params) => {
   try {
-    const { data } = await axiosInstance.get('/admin/coach', {
+    const { data } = await axiosInstance.get('/admin/content/videos', {
       params,
     });
     return data; // Assume this returns the listing object
@@ -40,25 +40,6 @@ export const updateStatus = async (id) => {
       : { message: 'Unknown error occurred' };
   }
 };
-// export const updateRequestsStatus = async (id, payload) => {
-//   try {
-//     const response = await axiosInstance.post(
-//       `/admin/coach/${id}/update-request`,
-//       payload // ✅ send status/reason here
-//     );
-
-//     const {
-//       data: { message, status },
-//     } = response;
-
-//     return { message, status };
-//   } catch (error) {
-//     throw error.response
-//       ? error.response.data
-//       : { message: 'Unknown error occurred' };
-//   }
-// };
-// Services/Admin/CoachManagement.js
 export const updateRequestsStatus = async (id, payload) => {
   try {
     const response = await axiosInstance.post(
