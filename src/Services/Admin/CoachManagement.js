@@ -4,7 +4,7 @@ import { buildFormData } from '../../Utils/Utils';
 // GET
 export const getListing = async (params) => {
   try {
-    const { data } = await axiosInstance.get('/admin/content/videos', {
+    const { data } = await axiosInstance.get('/admin/coach', {
       params,
     });
     return data; // Assume this returns the listing object

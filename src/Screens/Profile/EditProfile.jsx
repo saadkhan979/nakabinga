@@ -18,6 +18,7 @@ import { FaCamera } from 'react-icons/fa6';
 
 const EditProfile = ({ setModalLoading }) => {
     const navigate = useNavigate();
+    const { user, setUser } = useUserStore();
     const [showModal, setShowModal] = useState(false);
     const { mutate, isPending } = useMutation({
         mutationFn: userProfileUpdate,

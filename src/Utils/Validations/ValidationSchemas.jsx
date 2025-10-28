@@ -281,3 +281,73 @@ export const addPlanValidationSchema = Yup.object({
   price: Yup.number().required('Price is required').positive('Price must be positive'),
   description: Yup.string().required('Description is required'),
 });
+
+// export const addFAQsValidationSchema = Yup.object({
+//   question: Yup.string()
+//     .trim()
+//     .required('Question is required'),
+
+//   type: Yup.string()
+//     .required('Please select an answer type'),
+
+//   answer: Yup.string(),
+
+//   file: Yup.mixed(),
+
+//   video: Yup.mixed(),
+// });
+
+export const addFAQsValidationSchema = Yup.object({
+  question: Yup.string()
+    .trim()
+    .required('Question is required'),
+
+  type: Yup.string()
+    .oneOf(['text', 'image', 'video'], 'Invalid answer type')
+    .required('Answer type is required'),
+
+  answer: Yup.string().when('type', {
+    is: 'text',
+    // then: (schema) =>
+    //   schema.trim().required('Answer text is required'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+
+  file: Yup.mixed().when('type', {
+    is: 'image',
+    then: (schema) =>
+      schema
+        .test('fileType', 'Only image files are allowed', (value) => {
+          if (!value) return true; // Allow empty for edit mode
+
+          // If it's an existing file with URL (edit mode), allow it
+          if (value.url && !value.file) {
+            return true;
+          }
+
+          // If it's a new file upload, check the type
+          const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+          return allowedTypes.includes(value?.file?.type || value?.type);
+        }),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+
+  video: Yup.mixed().when('type', {
+    is: 'video',
+    then: (schema) =>
+      schema
+        .test('fileType', 'Only video files are allowed', (value) => {
+          if (!value) return true; // Allow empty for edit mode
+
+          // If it's an existing file with URL (edit mode), allow it
+          if (value.url && !value.file) {
+            return true;
+          }
+
+          // If it's a new file upload, check the type
+          const allowedTypes = ['video/mp4', 'video/webm', 'video/ogg'];
+          return allowedTypes.includes(value?.file?.type || value?.type);
+        }),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+});

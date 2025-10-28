@@ -47,6 +47,9 @@ import PlaneDetail from './SubscriptionManagement/PlaneDetail';
 import Profile from '../Profile/Profile';
 import EditProfile from '../Profile/EditProfile';
 import ChangePassword from '../Profile/ChangePassword';
+import FAQsManagement from './FAQsManagement/FAQsManagement';
+import AddFAQs from './FAQsManagement/AddFAQs';
+import EditFAQs from './FAQsManagement/EditFAQs';
 
 const AdminRoutes = () => {
   return (
@@ -101,11 +104,17 @@ const AdminRoutes = () => {
       <Route path="subscription-management/subscription-plan/add-plan" element={<AddPlan />} />
       <Route path="subscription-management/subscription-plan/edit-plan/:id" element={<EditPlan />} />
 
+      <Route path="faq-Management" element={<FAQsManagement />} />
+      <Route path="faq-Management/add" element={<AddFAQs />} />
+      <Route path="faq-Management/edit/:id" element={<EditFAQs />} />
+
       <Route path="profile" element={<Profile />} />
       <Route path="edit-profile" element={<EditProfile />} />
       <Route path="change-password" element={<ChangePassword />} />
 
       <Route path="*" element={<Navigate to="/admin/dashboard" />} />
+
+      <Route path="notifications" element={<Notifications />} />
     </Routes>
   );
 };

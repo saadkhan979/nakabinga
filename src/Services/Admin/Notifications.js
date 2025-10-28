@@ -4,10 +4,11 @@ import { buildFormData } from '../../Utils/Utils';
 // GET
 export const getNotifications = async (params) => {
   try {
-    const { data } = await axiosInstance.get('/admin-api/notifications', {
+    const { data } = await axiosInstance.get('/notifications/all/list', {
       params,
     });
-    return data.detail; // Assume this returns the listing object
+    // console.log(data, 'getNotifications');
+    return data; // Assume this returns the listing object
   } catch (error) {
     throw error.response
       ? error.response.data
@@ -18,8 +19,8 @@ export const getNotifications = async (params) => {
 //MARK READ
 export const editNotification = async (id) => {
   try {
-    const response = await axiosInstance.post(
-      `/admin-api/notifications/${id}`);
+    const response = await axiosInstance.post(`/notifications/${id}`);
+    // console.log(data, 'editNotification');
     const {
       data: { message, status },
     } = response;
@@ -30,4 +31,3 @@ export const editNotification = async (id) => {
       : { message: 'Unknown error occurred' };
   }
 };
-

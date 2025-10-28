@@ -1,0 +1,13 @@
+.faqsMain .accordion-header .accordion-button{
+    background: var(--pinkColor);
+    border-radius: 50px !important;
+    padding: 16px 25px;
+    margin: 0 0 20px 0;
+    box-shadow: unset !important;
+}
+.faqsMain .accordion-collapse .accordion-body{
+    font-size: 16px;    
+    border-radius: 30px;
+    border: 1px solid rgb(1 32 50 / 20%);
+    padding: 16px 25px;
+}
