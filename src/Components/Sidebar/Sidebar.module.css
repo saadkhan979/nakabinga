@@ -99,6 +99,10 @@
 .menu-item.active svg {
   filter: brightness(1);
 }
+.menu-item:hover img,
+.menu-item.active img {
+  filter: brightness(11);
+}
 
 .sidebar.collapsed .menu-item {
   justify-content: center;
@@ -148,7 +152,7 @@
 
 svg.icon {
   width: 20px;
-
+  height: auto;
   path {
     fill: var(--contrast-text-color);
   }

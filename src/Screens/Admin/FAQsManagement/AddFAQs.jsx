@@ -80,12 +80,10 @@ const AddFAQs = ({ showModal, closeModal, setModalLoading }) => {
                     video: null,
                 }}
                 validationSchema={addFAQsValidationSchema}
-                // onSubmit={(values) => { console.log(values) }}
                 onSubmit={handleFormSubmit}
             >
                 {({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue }) => (
                     <form onSubmit={handleSubmit} className="category-wrap">
-                        {console.log(values, "values999")}
                         {/* Question Field */}
                         <div className="row">
                             <div className="col-md-12">

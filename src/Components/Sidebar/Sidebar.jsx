@@ -14,11 +14,13 @@ import sidebarIcon6 from "../../assets/images/sidebar/sidebarIcon6.svg?react";
 import sidebarIcon7 from "../../assets/images/sidebar/sidebarIcon7.svg?react";
 import sidebarIcon8 from "../../assets/images/sidebar/sidebarIcon8.svg?react";
 import sidebarIcon9 from "../../assets/images/sidebar/sidebarIcon9.svg?react";
-import sidebarIcon10 from "../../assets/images/sidebar/sidebarIcon10.svg?react";
+// import sidebarIcon10 from "../../assets/images/sidebar/sidebarIcon10.svg?react";
+import sidebarIcon10 from "../../assets/images/sidebar/sidebarIcon10.png";
 import sidebarIcon11 from "../../assets/images/sidebar/sidebarIcon11.svg?react";
 import sidebarIcon12 from "../../assets/images/sidebar/sidebarIcon12.svg?react";
 import sidebarIcon13 from "../../assets/images/sidebar/sidebarIcon13.svg?react";
-import sidebarIcon14 from "../../assets/images/sidebar/sidebarIcon14.svg?react";
+// import sidebarIcon14 from "../../assets/images/sidebar/sidebarIcon14.svg?react";
+import sidebarIcon14 from "../../assets/images/sidebar/sidebarIcon14.png";
 import sidebarIcon15 from "../../assets/images/sidebar/sidebarIcon15.svg?react";
 import logo from "../../assets/images/logo.png";
 
@@ -104,7 +106,7 @@ const menuItems = [
     id: "10",
     label: "Payout Management",
     link: "/admin/payout-management",
-    icon: sidebarIcon10,
+    image: sidebarIcon10,
   },
   {
     roles: ["admin"],
@@ -132,7 +134,8 @@ const menuItems = [
     id: "14",
     label: "Audio Management",
     link: "/admin/audio-management",
-    icon: sidebarIcon14,
+    // icon: sidebarIcon14,
+    image: sidebarIcon14,
   },
   {
     roles: ["admin"],
@@ -203,6 +206,7 @@ const Sidebar = ({ sideBarClass, disable = false }) => {
                     aria-controls={`submenu-${item.id}`}
                   >
                     {item.icon && <item.icon className={Styles.icon} />}
+                    {item.image && <img src={item.image} className={Styles.image} />}
                     <p className="m-0">{item.label}</p>
                     {item.subItems ? (
                       <FaChevronDown

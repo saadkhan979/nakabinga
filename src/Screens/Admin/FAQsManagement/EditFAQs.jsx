@@ -19,7 +19,7 @@ const EditFAQs = ({ showModal, closeModal, setModalLoading }) => {
     const location = useLocation();
     const { id } = useParams();
 
-    // ✅ FAQ data from navigation state
+    // FAQ data from navigation state
     const faqData = location.state;
 
     const { mutate, isPending } = useMutation({
@@ -91,8 +91,6 @@ const EditFAQs = ({ showModal, closeModal, setModalLoading }) => {
             >
                 {({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue }) => (
                     <form onSubmit={handleSubmit} className="category-wrap">
-                        {console.log(values, "edit values")}
-
                         {/* Question Field */}
                         <div className="row">
                             <div className="col-md-12">

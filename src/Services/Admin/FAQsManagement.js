@@ -76,3 +76,14 @@ export const editData = async (id, formData) => {
       : { message: 'Unknown error occurred' };
   }
 };
+
+export const deleteData = async (id) => {
+  try {
+    const { data } = await axiosInstance.post(`/admin/faqs/${id}/delete`);
+    return data.data;
+  } catch (error) {
+    throw error.response
+      ? error.response.data
+      : { message: 'Unknown error occurred' };
+  }
+};
