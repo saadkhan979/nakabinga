@@ -18,7 +18,7 @@ import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
 import ImageUploader from '../../../Components/ImageUploader/ImageUploader';
 import { useState } from 'react';
 
-const AddCoach = ({ showModal, closeModal }) => {
+const AddCoach = ({ showModal, closeModal, setModalLoading }) => {
     usePageTitle('Add Coach');
     const navigate = useNavigate();
 
@@ -29,10 +29,10 @@ const AddCoach = ({ showModal, closeModal }) => {
         mutationFn: addData,
         onSuccess: () => {
             closeModal(); // Close any open modals
-            showToast('Category has been added successfully!', 'success'); // ✅ Toast on success
+            showToast('Coach Category has been added successfully!', 'success'); // ✅ Toast on success
             showModal(
                 "",
-                "Category Has Been Added Successfully!",
+                "Coach Category Has Been Added Successfully!",
                 () => navigate('/admin/coach-category'),
                 "success",
                 null
@@ -49,15 +49,10 @@ const AddCoach = ({ showModal, closeModal }) => {
             "",
             "Are You Sure, You Want To Add Coach?",
             () => {
-                showToast('Adding category, please wait...', 'info');
-                // mutate(values);
-                const payload = {
-                    name: values.name,
-                    is_active: values.is_active,
-                    file: values.image?.file,
-                    type: 'coach', // ✅ Add this missing field
-                };
-                mutate(payload);
+                setModalLoading(true);
+                mutate(values, {
+                    onSettled: () => setModalLoading(false),
+                });
             },
             "warning",
             null
@@ -79,6 +74,7 @@ const AddCoach = ({ showModal, closeModal }) => {
                         name: "",
                         is_active: "",
                         image: "",
+                        type: 'coach',
                     }}
                     validationSchema={categoryValidationSchema}
                     onSubmit={handleSubmit}

@@ -133,3 +133,11 @@ export const subscriptionplanHeaders = [
   'status',
   'action',
 ];
+export const queriesHeaders = [
+  'S. No.',
+  'Name',
+  'email address',
+  'user type',
+  'date',
+  'action',
+];

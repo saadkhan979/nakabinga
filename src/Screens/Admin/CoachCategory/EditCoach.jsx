@@ -16,7 +16,7 @@ import { useState } from 'react';
 import "./styles.css";
 import Skeleton from 'react-loading-skeleton';
 
-const EditCoach = ({ showModal, closeModal }) => {
+const EditCoach = ({ showModal, closeModal, setModalLoading }) => {
     usePageTitle('Edit Coach');
     const navigate = useNavigate();
     const { id } = useParams();
@@ -37,13 +37,13 @@ const EditCoach = ({ showModal, closeModal }) => {
 
     // ✅ Mutation for editing
     const { mutate, isPending } = useMutation({
-        mutationFn: editData,
+        mutationFn: ({ formData, id }) => editData(formData, id),
         onSuccess: () => {
             closeModal();
-            showToast('Category has been updated successfully!', 'success');
+            showToast('Coach Category has been updated successfully!', 'success');
             showModal(
                 "",
-                "Category Has Been Updated Successfully!",
+                "Coach Category Has Been Updated Successfully!",
                 () => navigate('/admin/coach-category'),
                 "success",
                 null
@@ -58,16 +58,15 @@ const EditCoach = ({ showModal, closeModal }) => {
     const handleSubmit = (values) => {
         showModal(
             "",
-            "Are You Sure You Want To Update This Category?",
+            "Are You Sure You Want To Update This Coach Category?",
             () => {
-                showToast('Updating category, please wait...', 'info');
-                const payload = new FormData();
-                payload.append('name', values.name);
-                payload.append('is_active', values.is_active);
-                payload.append('type', 'coach');
-                if (values.image?.file) payload.append('file', values.image.file);
-
-                mutate({ id, payload }); // ✅ Pass id & payload correctly
+                setModalLoading(true);
+                mutate(
+                    { formData: values, id },
+                    {
+                        onSettled: () => setModalLoading(false),
+                    }
+                );
             },
             "warning",
             null
@@ -128,6 +127,7 @@ const EditCoach = ({ showModal, closeModal }) => {
                 initialValues={{
                     name: fetchedData?.name || '',
                     is_active: fetchedData?.is_active ?? '',
+                    type: 'coach',
                     image: fetchedData?.image
                         ? { url: fetchedData.image, file: null }
                         : { url: '', file: null },

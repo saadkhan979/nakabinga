@@ -50,6 +50,7 @@ import ChangePassword from '../Profile/ChangePassword';
 import FAQsManagement from './FAQsManagement/FAQsManagement';
 import AddFAQs from './FAQsManagement/AddFAQs';
 import EditFAQs from './FAQsManagement/EditFAQs';
+import Queries from './Queries/Queries';
 
 const AdminRoutes = () => {
   return (
@@ -107,6 +108,8 @@ const AdminRoutes = () => {
       <Route path="faq-Management" element={<FAQsManagement />} />
       <Route path="faq-Management/add" element={<AddFAQs />} />
       <Route path="faq-Management/edit/:id" element={<EditFAQs />} />
+
+      <Route path="queries" element={<Queries />} />
 
       <Route path="profile" element={<Profile />} />
       <Route path="edit-profile" element={<EditProfile />} />

@@ -16,7 +16,7 @@ import { useState } from 'react';
 import "./styles.css";
 import Skeleton from 'react-loading-skeleton';
 
-const EditCategory = ({ showModal, closeModal }) => {
+const EditCategory = ({ showModal, closeModal, setModalLoading }) => {
     usePageTitle('Edit Category');
     const navigate = useNavigate();
     const { id } = useParams();
@@ -37,7 +37,7 @@ const EditCategory = ({ showModal, closeModal }) => {
 
     // ✅ Mutation for editing
     const { mutate, isPending } = useMutation({
-        mutationFn: editData,
+        mutationFn: ({ formData, id }) => editData(formData, id),
         onSuccess: () => {
             closeModal();
             showToast('Category has been updated successfully!', 'success');
@@ -60,14 +60,13 @@ const EditCategory = ({ showModal, closeModal }) => {
             "",
             "Are You Sure You Want To Update This Category?",
             () => {
-                showToast('Updating category, please wait...', 'info');
-                const payload = new FormData();
-                payload.append('name', values.name);
-                payload.append('is_active', values.is_active);
-                payload.append('type', 'service_provider');
-                if (values.image?.file) payload.append('file', values.image.file);
-
-                mutate({ id, payload }); // ✅ Pass id & payload correctly
+                setModalLoading(true);
+                mutate(
+                    { formData: values, id }, // ✅ send both values and id
+                    {
+                        onSettled: () => setModalLoading(false),
+                    }
+                );
             },
             "warning",
             null
@@ -128,6 +127,7 @@ const EditCategory = ({ showModal, closeModal }) => {
                 initialValues={{
                     name: fetchedData?.name || '',
                     is_active: fetchedData?.is_active ?? '',
+                    type: 'service_provider',
                     image: fetchedData?.image
                         ? { url: fetchedData.image, file: null }
                         : { url: '', file: null },
@@ -206,7 +206,7 @@ const EditCategory = ({ showModal, closeModal }) => {
                     </form>
                 )}
             </Formik>
-        </div>
+        </div >
     );
 };
 

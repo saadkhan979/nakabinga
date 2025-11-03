@@ -39,11 +39,12 @@ export const viewUser = async (id) => {
       : { message: 'Unknown error occurred' };
   }
 };
-export const addData = async (payload) => {
+export const addData = async (formData) => {
   try {
-    const { data } = await axiosInstance.post('/admin/categories', payload, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    const payload = new FormData();
+    buildFormData(payload, formData);
+
+    const { data } = await axiosInstance.post('/admin/categories', payload);
     return data.data;
   } catch (error) {
     throw error.response
@@ -51,15 +52,16 @@ export const addData = async (payload) => {
       : { message: 'Unknown error occurred' };
   }
 };
-export const editData = async ({ id, payload }) => {
+export const editData = async (formData, id) => {
   try {
+    const payload = new FormData();
+    buildFormData(payload, formData);
+
     const { data } = await axiosInstance.post(
       `/admin/categories/${id}/update`,
-      payload,
-      {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      }
+      payload
     );
+
     return data.data;
   } catch (error) {
     throw error.response

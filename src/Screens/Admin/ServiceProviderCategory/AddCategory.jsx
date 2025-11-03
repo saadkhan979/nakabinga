@@ -18,7 +18,7 @@ import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
 import ImageUploader from '../../../Components/ImageUploader/ImageUploader';
 import { useState } from 'react';
 
-const AddCategory = ({ showModal, closeModal }) => {
+const AddCategory = ({ showModal, closeModal, setModalLoading }) => {
     usePageTitle('Add Category');
     const navigate = useNavigate();
 
@@ -49,15 +49,10 @@ const AddCategory = ({ showModal, closeModal }) => {
             "",
             "Are You Sure, You Want To Add Category?",
             () => {
-                showToast('Adding category, please wait...', 'info');
-                // mutate(values);
-                const payload = {
-                    name: values.name,
-                    is_active: values.is_active,
-                    file: values.image?.file,
-                    type: 'service_provider', // ✅ Add this missing field
-                };
-                mutate(payload);
+                setModalLoading(true);
+                mutate(values, {
+                    onSettled: () => setModalLoading(false),
+                });
             },
             "warning",
             null
@@ -79,6 +74,7 @@ const AddCategory = ({ showModal, closeModal }) => {
                         name: "",
                         is_active: "",
                         image: "",
+                        type: 'service_provider',
                     }}
                     validationSchema={categoryValidationSchema}
                     onSubmit={handleSubmit}

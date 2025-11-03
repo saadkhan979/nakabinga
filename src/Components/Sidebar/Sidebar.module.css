@@ -2,6 +2,7 @@
   width: 270px;
   position: fixed;
   transition: all 0.3s ease-out;
+  background: var(--content-bg-color);
   z-index: 6;
   height: calc(100% - 77.5px);
   padding-top: 25px;
@@ -42,12 +43,13 @@
   width: 270px;
   position: fixed;
   transition: all 0.3s ease-out;
-  background: var(--primary-color);
+  background: var(--content-bg-color);
   z-index: 6;
   height: 100%;
-  top: 0;
+  top: 78px;
   -ms-overflow-style: none;
   overflow: hidden;
+  padding-top: 25px;
 }
 
 .sidebar:hover.collapsed .sideLinkText {}
