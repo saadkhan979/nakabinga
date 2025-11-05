@@ -120,7 +120,6 @@ const ServiceProvidersRequestsDetails = () => {
       </div>
       <div className="d-card py-45 mb-45">
         <div className="row flex-wrap-reverse">
-
           <div className="col-md-10">
             <div className="row">
               <div className="col-md-12">
@@ -223,32 +222,40 @@ const ServiceProvidersRequestsDetails = () => {
           </div>
         </div>
       </div>
-      <div className="d-card py-45 mb-45">
-        <div className="row">
-          <div className='col-md-12'>
-            <h2 className="screen-title">Certification Detail</h2>
-          </div>
-          <div className="col-md-6">
+      {user?.certifications?.length > 0 ? (
+        user.certifications.map((cert, index) => (
+          <div className="d-card py-45 mb-45" key={index}>
             <div className="row">
-              <div className="col-md-4 mb-3">
-                <p className="text-label">Institute Name:</p>
-                <p className="text-data">{user?.institute_name}</p>
+              <div className='col-md-12'>
+                <h2 className="screen-title">Certification Detail</h2>
               </div>
-              <div className="col-md-4 mb-3">
-                <p className="text-label">Certificate Title:</p>
-                <p className="text-data">{user?.certificate_title}</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-8 mb-3">
-                <div className='certificateImg'>
-                  <img src={user?.avatar} alt="" />
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="col-md-4 mb-3">
+                    <p className="text-label">Institute Name:</p>
+                    <p className="text-data">{cert?.institute_name}</p>
+                  </div>
+                  <div className="col-md-4 mb-3">
+                    <p className="text-label">Certificate Title:</p>
+                    <p className="text-data">{cert?.certificate_title}</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-8 mb-3">
+                    <div className='certificateImg'>
+                      <img src={cert?.certificate_picture} alt="" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        ))
+      ) : (
+        <div className="col-md-12">
+          <p className="text-muted">No certifications found.</p>
         </div>
-      </div>
+      )}
 
       <CustomModal
         show={changeStatusModal}

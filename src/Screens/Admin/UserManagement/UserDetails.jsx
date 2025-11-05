@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import BackButton from '../../../Components/BackButton';
 import CustomButton from '../../../Components/CustomButton';
 import CustomModal from '../../../Components/CustomModal';
@@ -34,6 +34,7 @@ const UserDetails = ({ filters,
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const { id } = useParams();
   let queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   // Mutation for updating status
   const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
@@ -167,9 +168,7 @@ const UserDetails = ({ filters,
               </div>
               <div className='col-md-12'>
                 <div className='d-inline-block mt-4'>
-                  <CustomButton
-                    text="Newsfeed"
-                  />
+                  <Link to="newsfeed" className="customButton">Newsfeed</Link>
                 </div>
               </div>
             </div>

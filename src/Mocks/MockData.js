@@ -722,3 +722,43 @@ export const supportLogsData = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis',
   },
 ];
+
+export const newsfeedData = [
+  {
+    id: 1,
+    authorName: 'Christiana Andy',
+    authorImage:
+      'https://custom-dev.onlinetestingserver.com/nakabinga-backend/storage/upload/Img_202510061159210.jpg',
+    time: '2 days ago',
+    text: '"Digital transformation continues to reshape industries worldwide, but 2024 is set to bring some especially impactful changes. From advanced AI applications to increased focus on data privacy, these shifts could redefine how businesses approach technology. Our latest analysis breaks down the key trends and how they could influence your organization’s digital journey. Read more to stay ahead of the curve!"',
+    images: ['/images/post1.jpg', '/images/post2.jpg'],
+    reactionsCount: 1280,
+    commentsCount: 220,
+    reactions: [
+      {
+        name: 'Marvel Edward',
+        avatar:
+          'https://custom-dev.onlinetestingserver.com/nakabinga-backend/storage/upload/Img_202510061159210.jpg',
+      },
+      {
+        name: 'Moshin',
+        avatar:
+          'https://custom-dev.onlinetestingserver.com/nakabinga-backend/storage/upload/Img_202510061159210.jpg',
+      },
+    ],
+    comments: [
+      {
+        name: 'Julia Michael',
+        avatar:
+          'https://custom-dev.onlinetestingserver.com/nakabinga-backend/storage/upload/Img_202510061159210.jpg',
+        text: '"This is an excellent breakdown of the upcoming trends in digital transformation! As a mid-sized business in the retail industry, we’re already feeling the pressure to adopt AI-driven solutions. However, budget constraints and data privacy concerns make it difficult to implement these technologies effectively. I’d love to hear more about practical, scalable solutions for companies our size. Also, any advice on balancing innovation with compliance would be much appreciated!"',
+      },
+      {
+        name: 'John Doe',
+        avatar:
+          'https://custom-dev.onlinetestingserver.com/nakabinga-backend/storage/upload/Img_202510061159210.jpg',
+        text: '"This is an excellent breakdown of the upcoming trends in digital transformation! As a mid-sized business in the retail industry, we’re already feeling the pressure to adopt AI-driven solutions. However, budget constraints and data privacy concerns make it difficult to implement these technologies effectively. I’d love to hear more about practical, scalable solutions for companies our size. Also, any advice on balancing innovation with compliance would be much appreciated!"',
+      },
+    ],
+  },
+];

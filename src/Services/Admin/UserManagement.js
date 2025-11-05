@@ -1,4 +1,5 @@
 import axiosInstance from '../../Config/axiosConfig';
+import { newsfeedData } from '../../Mocks/MockData';
 import { buildFormData } from '../../Utils/Utils';
 
 // GET
@@ -60,6 +61,18 @@ export const getAccountType = async (type) => {
       `/user-api/beneficiary-register/type?type=${type}`
     );
     return data.detail; // Assume this returns success obj
+  } catch (error) {
+    throw error.response
+      ? error.response.data
+      : { message: 'Unknown error occurred' };
+  }
+};
+export const getNewsfeed = async (type) => {
+  try {
+    // const { data } = await axiosInstance.get(
+    //   `/user-api/beneficiary-register/type?type=${type}`
+    // );
+    return newsfeedData; // Assume this returns success obj
   } catch (error) {
     throw error.response
       ? error.response.data

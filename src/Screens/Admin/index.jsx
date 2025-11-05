@@ -51,6 +51,7 @@ import FAQsManagement from './FAQsManagement/FAQsManagement';
 import AddFAQs from './FAQsManagement/AddFAQs';
 import EditFAQs from './FAQsManagement/EditFAQs';
 import Queries from './Queries/Queries';
+import Newsfeed from './UserManagement/Newsfeed';
 
 const AdminRoutes = () => {
   return (
@@ -58,6 +59,7 @@ const AdminRoutes = () => {
       <Route path="dashboard" element={<Dashboard />} />
       <Route path="user-management" element={<UserManagement />} />
       <Route path="user-management/:id" element={<UserDetails />} />
+      {/* <Route path="user-management/:id/newsfeed" element={<Newsfeed />} /> */}
 
       <Route path="coach-management" element={<CoachManagement />} />
       <Route path="coach-management/:id" element={<CoachDetails />} />
