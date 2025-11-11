@@ -242,7 +242,7 @@ const CoachRequestsDetails = () => {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-md-8 mb-3">
+                  <div className="col-md-4 mb-3">
                     <div className='certificateImg'>
                       <img src={cert?.certificate_picture} alt="" />
                     </div>

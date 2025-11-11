@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import StaticNavbar from './StaticNavbar';
 import StaticSidebar from './StaticSidebar';
+import './Loader.css';
 
 const SkeletonLoader = () => {
   const [sideBarClass, setSideBarClass] = useState(
@@ -15,7 +16,7 @@ const SkeletonLoader = () => {
 
   return (
     <div>
-      <StaticNavbar sideBarToggle={sideBarToggle} sideBarClass={sideBarClass} />
+      {/* <StaticNavbar sideBarToggle={sideBarToggle} sideBarClass={sideBarClass} />
       <div>
         <StaticSidebar sideBarClass={sideBarClass} />
         <div
@@ -35,6 +36,9 @@ const SkeletonLoader = () => {
             </div>
           </div>
         </div>
+      </div> */}
+      <div className="loaderContainer">
+        <div className="spinner"></div>
       </div>
     </div>
   );

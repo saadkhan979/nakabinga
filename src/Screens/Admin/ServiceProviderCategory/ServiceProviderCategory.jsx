@@ -44,13 +44,13 @@ const ServiceProviderCategory = ({
 
   //GET USERS
   const {
-    data: userManagement,
+    data: serviceProviderCategory,
     isLoading,
     isError,
     error,
     refetch,
   } = useFetchTableData(
-    'listing',
+    'serviceProviderCategorylisting',
     filters,
     updatePagination,
     getListing
@@ -117,7 +117,7 @@ const ServiceProviderCategory = ({
                 { title: 'Registration Date', from: 'from', to: 'to' },
               ]}
             >
-              {(userManagement?.data?.length || isError) && (
+              {(serviceProviderCategory?.data?.length || isError) && (
                 <tbody>
                   {isError && (
                     <tr>
@@ -128,7 +128,7 @@ const ServiceProviderCategory = ({
                       </td>
                     </tr>
                   )}
-                  {userManagement?.data?.map((item, index) => (
+                  {serviceProviderCategory?.data?.map((item, index) => (
                     <tr key={item.id}>
                       <td>
                         {serialNum(

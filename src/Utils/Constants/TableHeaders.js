@@ -133,6 +133,23 @@ export const subscriptionplanHeaders = [
   'status',
   'action',
 ];
+
+export const audioManagementHeaders = [
+  'S. No.',
+  'Audio Title',
+  'Duration',
+  'Date Added',
+  'status',
+  'action',
+];
+export const audioCategoryManagementHeaders = [
+  'S. No.',
+  'Category Name',
+  'Date',
+  'status',
+  'action',
+];
+
 export const queriesHeaders = [
   'S. No.',
   'Name',

@@ -42,13 +42,13 @@ const ServiceProviderManagement = ({
 
   //GET USERS
   const {
-    data: userManagement,
+    data: serviceProviderManagement,
     isLoading,
     isError,
     error,
     refetch,
   } = useFetchTableData(
-    'userListing',
+    'serviceProviderManagementListing',
     filters,
     updatePagination,
     getListing
@@ -115,7 +115,7 @@ const ServiceProviderManagement = ({
                 { title: 'Registration Date', from: 'from', to: 'to' },
               ]}
             >
-              {(userManagement?.data?.length || isError) && (
+              {(serviceProviderManagement?.data?.length || isError) && (
                 <tbody>
                   {isError && (
                     <tr>
@@ -126,7 +126,7 @@ const ServiceProviderManagement = ({
                       </td>
                     </tr>
                   )}
-                  {userManagement?.data?.map((item, index) => (
+                  {serviceProviderManagement?.data?.map((item, index) => (
                     <tr key={item.id}>
                       <td>
                         {serialNum(

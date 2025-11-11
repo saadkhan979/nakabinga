@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { loginAdmin, loginUser } from '../Services/Auth';
 import useUserStore from '../Stores/UserStore';
 import { showErrorToast } from '../Utils/Utils';
+import { showToast } from '../Components/Toast/Toast';
 
 export function useLogin(role = 'business') {
   const { setUser, setRole, setToken } = useUserStore();
@@ -18,9 +19,8 @@ export function useLogin(role = 'business') {
       document.cookie = `token=${data.token}; path=/; SameSite=Lax`;
     },
     onError: (error) => {
-      showErrorToast(error);
-      // Handle errors here (e.g., display a notification)
-      console.error('Login Failed', error);
+      showToast(error.data.message.failed, 'error');
+      console.error('Login Failed', error.data.message);
     },
   });
 }

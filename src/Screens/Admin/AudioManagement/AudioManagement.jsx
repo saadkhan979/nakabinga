@@ -6,6 +6,8 @@ import {
     HiOutlineEye,
     HiOutlineXCircle,
 } from 'react-icons/hi2';
+import { MdEditSquare } from "react-icons/md";
+
 import { useNavigate } from 'react-router-dom';
 import CustomModal from '../../../Components/CustomModal';
 import CustomTable from '../../../Components/CustomTable/CustomTable';
@@ -16,17 +18,16 @@ import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
 import { useFetchTableData } from '../../../Hooks/useTable';
 import {
-    getSubscriptionPlan,
-    updateStatusSubPlan,
-} from '../../../Services/Admin/SubscriptionManagement';
+    getListing,
+    updateStatus,
+} from '../../../Services/Admin/AudioManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
 import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
-import { subscriptionplanHeaders } from '../../../Utils/Constants/TableHeaders';
+import { audioManagementHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, serialNum, showErrorToast } from '../../../Utils/Utils';
 import CustomButton from '../../../Components/CustomButton';
-import { MdEditSquare } from 'react-icons/md';
 
-const SubscriptionPlan = ({
+const AudioManagement = ({
     showModal,
     closeModal,
     filters,
@@ -34,7 +35,7 @@ const SubscriptionPlan = ({
     pagination,
     updatePagination,
 }) => {
-    usePageTitle('Subscription Plan');
+    usePageTitle('Audio Management');
     const navigate = useNavigate();
     const [changeStatusModal, setChangeStatusModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -43,17 +44,19 @@ const SubscriptionPlan = ({
 
     //GET USERS
     const {
-        data: subscriptionPlan,
+        data: audioManagement,
         isLoading,
         isError,
         error,
         refetch,
     } = useFetchTableData(
-        'subscriptionPlanListing',
+        'audioManagementListing',
         filters,
         updatePagination,
-        getSubscriptionPlan
+        getListing
     );
+
+
     if (isError) {
         showErrorToast(error);
     }
@@ -69,12 +72,12 @@ const SubscriptionPlan = ({
     // Mutation for updating status
     const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
         useMutation({
-            mutationFn: async (id) => await updateStatusSubPlan(id),
+            mutationFn: async (id) => await updateStatus(id),
             onSuccess: (data) => {
                 showToast('Status updated successfully', 'success');
                 setChangeStatusModal(false);
                 setShowSuccessModal(true);
-                queryClient.invalidateQueries(['languageManagement', filters]);
+                queryClient.invalidateQueries(['listing', filters]);
             },
             onError: (error) => {
                 console.error('Error updating status:', error);
@@ -92,18 +95,25 @@ const SubscriptionPlan = ({
         <>
             <section>
                 <div className="d-flex justify-content-between flex-wrap mb-3">
-                    <h2 className="screen-title mb-0">Subscription Plan</h2>
-                    <CustomButton
-                        text="New Plan"
-                        onClick={() => (navigate("add-plan"))}
-                    />
+                    <h2 className="screen-title mb-0">Audio Management</h2>
+                    <div className='d-flex gap-2'>
+                        <CustomButton
+                            text="Add Audio"
+                            onClick={() => (navigate("add"))}
+                            className="customButtonBor px-5"
+                        />
+                        <CustomButton
+                            text="Category Management"
+                            onClick={() => (navigate("audio-category-management"))}
+                        />
+                    </div>
                 </div>
                 <Row>
                     <Col xs={12}>
                         <CustomTable
                             filters={filters}
                             setFilters={setFilters}
-                            headers={subscriptionplanHeaders}
+                            headers={audioManagementHeaders}
                             pagination={pagination}
                             isLoading={isLoading}
                             selectOptions={[
@@ -116,29 +126,27 @@ const SubscriptionPlan = ({
                                 { title: 'Registration Date', from: 'from', to: 'to' },
                             ]}
                         >
-                            {(subscriptionPlan?.data?.length || isError) && (
+                            {(audioManagement?.data?.length || isError) && (
                                 <tbody>
                                     {isError && (
                                         <tr>
-                                            <td colSpan={subscriptionplanHeaders.length}>
+                                            <td colSpan={audioManagementHeaders.length}>
                                                 <p className="text-danger mb-0">
                                                     Unable to fetch data at this time
                                                 </p>
                                             </td>
                                         </tr>
                                     )}
-                                    {subscriptionPlan?.data?.map((item, index) => (
+                                    {audioManagement?.data?.map((item, index) => (
                                         <tr key={item.id}>
                                             <td>
                                                 {serialNum(
                                                     (filters?.page - 1) * filters?.per_page + index + 1
                                                 )}
                                             </td>
-                                            <td>{item?.name}</td>
+                                            <td>{item?.title}</td>
                                             <td>{item?.duration}</td>
-                                            <td>{item?.price ? "$" : ""}{item?.price}</td>
                                             <td>{formatDate(item?.created_at)}</td>
-                                            <td>{formatDate(item?.updated_at)}</td>
                                             <td>
                                                 <span
                                                     className={`chip ${statusClassMap[item.is_active === 1 ? "Active" : "Inactive"]
@@ -159,7 +167,7 @@ const SubscriptionPlan = ({
                                                         {
                                                             name: 'Edit',
                                                             icon: MdEditSquare,
-                                                            onClick: () => navigate(`edit-plan/${item.id}`),
+                                                            onClick: () => navigate(`edit-audio/${item.id}`),
                                                             className: 'edit',
                                                         },
                                                         {
@@ -192,7 +200,7 @@ const SubscriptionPlan = ({
                 disableClick={isStatusUpdating}
                 action={confirmStatusChange}
                 description={`Are You Sure, You Want To ${isStatusActive(selectedObj) ? 'Inactivated' : 'Activated'
-                    } This language?`}
+                    } This Audio`}
             />
 
             <CustomModal
@@ -200,12 +208,11 @@ const SubscriptionPlan = ({
                 close={() => setShowSuccessModal(false)}
                 variant="success"
                 title="Success"
-                description={`language has been ${isStatusActive(selectedObj) ? 'Inactivated' : 'Activated'
+                description={`Audio has been ${isStatusActive(selectedObj) ? 'Inactivated' : 'Activated'
                     } Successfully.`}
             />
-
         </>
     );
 };
 
-export default withModal(withFilters(SubscriptionPlan));
+export default withModal(withFilters(AudioManagement));

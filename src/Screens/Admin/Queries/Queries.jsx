@@ -39,13 +39,13 @@ const Queries = ({
 
     //GET USERS
     const {
-        data: userManagement,
+        data: queriesManagement,
         isLoading,
         isError,
         error,
         refetch,
     } = useFetchTableData(
-        'userListing',
+        'queriesManagementListing',
         filters,
         updatePagination,
         getListing
@@ -86,7 +86,7 @@ const Queries = ({
                                 { title: 'Registration Date', from: 'from', to: 'to' },
                             ]}
                         >
-                            {(userManagement?.data?.length || isError) && (
+                            {(queriesManagement?.data?.length || isError) && (
                                 <tbody>
                                     {isError && (
                                         <tr>
@@ -97,7 +97,7 @@ const Queries = ({
                                             </td>
                                         </tr>
                                     )}
-                                    {userManagement?.data?.map((item, index) => (
+                                    {queriesManagement?.data?.map((item, index) => (
                                         <tr key={item.id}>
                                             <td>
                                                 {serialNum(

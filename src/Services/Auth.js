@@ -148,6 +148,7 @@ export const loginAdmin = async (credentials) => {
 
     return { token, role, user, status }; // Assume this returns the user object
   } catch (error) {
+    // console.log(error.response.data.data.message, '123');
     throw error.response
       ? error.response.data
       : { message: 'Unknown error occurred' };

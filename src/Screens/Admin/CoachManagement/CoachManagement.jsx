@@ -42,13 +42,13 @@ const CoachManagement = ({
 
   //GET USERS
   const {
-    data: userManagement,
+    data: coachManagement,
     isLoading,
     isError,
     error,
     refetch,
   } = useFetchTableData(
-    'userListing',
+    'coachManagementListing',
     filters,
     updatePagination,
     getListing
@@ -117,7 +117,7 @@ const CoachManagement = ({
                 { title: 'Registration Date', from: 'from', to: 'to' },
               ]}
             >
-              {(userManagement?.data?.length || isError) && (
+              {(coachManagement?.data?.length || isError) && (
                 <tbody>
                   {isError && (
                     <tr>
@@ -128,7 +128,7 @@ const CoachManagement = ({
                       </td>
                     </tr>
                   )}
-                  {userManagement?.data?.map((item, index) => (
+                  {coachManagement?.data?.map((item, index) => (
                     <tr key={item.id}>
                       <td>
                         {serialNum(

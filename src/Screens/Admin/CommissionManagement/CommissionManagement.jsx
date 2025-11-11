@@ -51,12 +51,12 @@ const CommissionManagement = ({
 
     // ✅ Fetch table data based on tab
     const {
-        data: userManagement,
+        data: commissionManagement,
         isLoading,
         isError,
         error,
     } = useFetchTableData(
-        ['listing', activeTab],
+        ['commissionManagementListing', activeTab],
         { ...filters, type: activeTab },
         updatePagination,
         getListing)
@@ -204,9 +204,9 @@ const CommissionManagement = ({
                                             </td>
                                         </tr>
                                     </tbody>
-                                ) : userManagement?.data?.length ? (
+                                ) : commissionManagement?.data?.length ? (
                                     <tbody>
-                                        {userManagement.data.map((item, index) => (
+                                        {commissionManagement.data.map((item, index) => (
                                             <tr key={item.id}>
                                                 <td>
                                                     {serialNum(

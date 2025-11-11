@@ -50,12 +50,12 @@ const SubscriptionLogs = ({
 
     // ✅ Fetch table data based on tab
     const {
-        data: userManagement,
+        data: subscriptionLogs,
         isLoading,
         isError,
         error,
     } = useFetchTableData(
-        ['listing', activeTab],
+        ['subscriptionLogsListing', activeTab],
         { ...filters, type: activeTab },
         updatePagination,
         getListing)
@@ -126,9 +126,9 @@ const SubscriptionLogs = ({
                                             </td>
                                         </tr>
                                     </tbody>
-                                ) : userManagement?.data?.length ? (
+                                ) : subscriptionLogs?.data?.length ? (
                                     <tbody>
-                                        {userManagement.data.map((item, index) => (
+                                        {subscriptionLogs.data.map((item, index) => (
                                             <tr key={item.id}>
                                                 <td>
                                                     {serialNum(

@@ -48,12 +48,12 @@ const ContentManagement = ({
 
   // ✅ Fetch table data based on tab
   const {
-    data: userManagement,
+    data: contentManagement,
     isLoading,
     isError,
     error,
   } = useFetchTableData(
-    ['listing', activeTab],
+    ['contentManagementlisting', activeTab],
     { ...filters, type: activeTab },
     updatePagination,
     getListing)
@@ -164,9 +164,9 @@ const ContentManagement = ({
                       </td>
                     </tr>
                   </tbody>
-                ) : userManagement?.data?.length ? (
+                ) : contentManagement?.data?.length ? (
                   <tbody>
-                    {userManagement.data.map((item, index) => (
+                    {contentManagement.data.map((item, index) => (
                       <tr key={item.id}>
                         <td>
                           {serialNum(

@@ -77,7 +77,14 @@
 .menu-item-container a {
   text-decoration: none;
 }
-
+.menu-item-container .menu-item p {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: normal;
+}
 .menu-item {
   display: flex;
   align-items: center;

@@ -282,21 +282,6 @@ export const addPlanValidationSchema = Yup.object({
   description: Yup.string().required('Description is required'),
 });
 
-// export const addFAQsValidationSchema = Yup.object({
-//   question: Yup.string()
-//     .trim()
-//     .required('Question is required'),
-
-//   type: Yup.string()
-//     .required('Please select an answer type'),
-
-//   answer: Yup.string(),
-
-//   file: Yup.mixed(),
-
-//   video: Yup.mixed(),
-// });
-
 export const addFAQsValidationSchema = Yup.object({
   question: Yup.string()
     .trim()
@@ -350,4 +335,29 @@ export const addFAQsValidationSchema = Yup.object({
         }),
     otherwise: (schema) => schema.notRequired(),
   }),
+});
+
+export const audioValidationSchema = Yup.object({
+  title: Yup.string()
+    .trim()
+    .required("Title is required")
+    .max(100, "Title must be at most 100 characters"),
+
+  category_id: Yup.string()
+    .required("Category is required"),
+
+  is_active: Yup.string()
+    .required("Status is required"),
+
+  file: Yup.mixed()
+    .required("Audio file is required"),
+});
+export const audioCategoryValidationSchema = Yup.object({
+  name: Yup.string()
+    .trim()
+    .required("Name is required")
+    .max(100, "Name must be at most 100 characters"),
+
+  is_active: Yup.string()
+    .required("Status is required"),
 });

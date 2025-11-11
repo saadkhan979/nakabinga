@@ -52,6 +52,14 @@ import AddFAQs from './FAQsManagement/AddFAQs';
 import EditFAQs from './FAQsManagement/EditFAQs';
 import Queries from './Queries/Queries';
 import Newsfeed from './UserManagement/Newsfeed';
+import AudioManagement from './AudioManagement/AudioManagement';
+import AddAudio from './AudioManagement/AddAudio';
+import EditAudio from './AudioManagement/EditAudio';
+import AudioDetails from './AudioManagement/AudioDetails';
+import AudioCategoryManagement from './AudioManagement/AudioCategoryManagement';
+import AddAudioCategory from './AudioManagement/AddAudioCategory';
+import EditAudioCategory from './AudioManagement/EditAudioCategory';
+import AudioCategoryDetails from './AudioManagement/AudioCategoryDetails';
 
 const AdminRoutes = () => {
   return (
@@ -110,6 +118,15 @@ const AdminRoutes = () => {
       <Route path="faq-Management" element={<FAQsManagement />} />
       <Route path="faq-Management/add" element={<AddFAQs />} />
       <Route path="faq-Management/edit/:id" element={<EditFAQs />} />
+
+      <Route path="audio-management" element={<AudioManagement />} />
+      <Route path="audio-management/:id" element={<AudioDetails />} />
+      <Route path="audio-management/add" element={<AddAudio />} />
+      <Route path="audio-management/edit-audio/:id" element={<EditAudio />} />
+      <Route path="audio-management/audio-category-management" element={<AudioCategoryManagement />} />
+      <Route path="audio-management/audio-category-management/:id" element={<AudioCategoryDetails />} />
+      <Route path="audio-management/audio-category-management/add" element={<AddAudioCategory />} />
+      <Route path="audio-management/audio-category-management/edit/:id" element={<EditAudioCategory />} />
 
       <Route path="queries" element={<Queries />} />
 
